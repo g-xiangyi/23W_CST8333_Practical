@@ -6,6 +6,10 @@
 ################################
 
 ################################
+# Model class contains data with record object
+################################
+
+################################
 # Creating a record object
 recordObject = dict()
 columnNames = list()
@@ -17,7 +21,11 @@ potatoesList = list()
 # Creating Model class
 class Model(object):
     def __init__(self):
-    self._item_type='potatoes_production'
+        self._item_type='potatoes_production'
+
+    # Method to print author name
+    def print_student_name():
+        print('Program written by Amy Guo')
 
     @property
     def item_type(self):
@@ -41,7 +49,7 @@ class Model(object):
                 line_count = 0
 
                 for row in csv_reader:
-                    if line_count == 0
+                    if line_count == 0:
                         line_count += 1
                     elif line_count > dataset_size:
                         break

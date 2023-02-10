@@ -11,8 +11,8 @@
 #
 
 # Importing classes
-import model.ModelDto
-import view.View
+from model.ModelDto import potatoesList
+
 
 # Creating Controller class
 class Controller(object):
@@ -45,7 +45,7 @@ class Controller(object):
     def show_dataset(self):
         self.view.show_dataset()
 
-    # ??
+    # Show single record
     def show_single_ds(self, item_index):
         self.view.view_load_partial_ds(item_index, item_index)
 

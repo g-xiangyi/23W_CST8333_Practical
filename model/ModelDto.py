@@ -9,6 +9,9 @@
 # Model class contains data with record object
 ################################
 
+# Importing csv
+import csv
+
 ################################
 # Creating a record object
 recordObject = dict()
@@ -17,15 +20,12 @@ columnNames = list()
 # Creating a list to be used to store the dataset
 potatoesList = list()
 
+
 ################################
 # Creating Model class
 class Model(object):
     def __init__(self):
-        self._item_type='potatoes_production'
-
-    # Method to print author name
-    def print_student_name():
-        print('Program written by Amy Guo')
+        self._item_type = 'potatoes_production'
 
     @property
     def item_type(self):
@@ -35,7 +35,7 @@ class Model(object):
     def item_type(self, new_item_type):
         self._item_type = new_item_type
 
-# Method to create partial dataset (10 records)
+    # Method to create partial dataset (10 records)
     @staticmethod
     def create_dataset_partial(dataset_name, dataset_size):
         try:
@@ -96,7 +96,7 @@ class Model(object):
         try:
             with open(dataset_name, mode='w') as csv_file:
                 fieldNames = columnNames
-                writer = csv.DictWriter(csv_file, fieldNames = fieldNames)
+                writer = csv.DictWriter(csv_file, fieldNames=fieldNames)
                 writer.writeheader()
                 for row in potatoesList:
                     writer.writerow(row)
@@ -115,20 +115,25 @@ class Model(object):
     @staticmethod
     def update_record(record_index):
         print('The {}th record has been selected, and is shown below:').format(record_index)
-        print(potatoesList[record_index-1])
+        print(potatoesList[record_index - 1])
         while True:
             key = input('Type name of column to edit:')
-            print(key + ' : ' + potatoesList[record_index-1][key])
+            print(key + ' : ' + potatoesList[record_index - 1][key])
             v = input('Enter new value for column: ')
-            potatoesList[record_index-1][key] = v
+            potatoesList[record_index - 1][key] = v
 
             s = input('Do you want to edit another column (y/n)?')
-            if s== 'n':
+            if s == 'n':
                 break
 
     # Method to delete record
     @staticmethod
     def delete_record(record_index):
-        record = potatoesList[record_index-1]
-        del potatoesList[record_index-1]
+        record = potatoesList[record_index - 1]
+        del potatoesList[record_index - 1]
         return record
+
+
+# Method to print author name
+def print_student_name():
+    print('Program written by Amy Guo')

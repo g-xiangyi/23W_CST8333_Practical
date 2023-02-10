@@ -10,6 +10,9 @@
 # ################################
 #
 
+# Importing dto
+from model.ModelDto import potatoesList
+
 # Creating View class
 class View(object):
 
@@ -20,7 +23,7 @@ class View(object):
         ix_print_name = 0
         for item in potatoesList:
             print(item)
-            ix_print_name +=1
+            ix_print_name += 1
             # Check to see if need to print student name
             if ix_print_name % 10 == 0:
                 print_student_name()
@@ -34,7 +37,7 @@ class View(object):
             ix += 1
             if ix < start_point:
                 continue
-            elif ix>= start_point:
+            elif ix >= start_point:
                 ix_print_name += 1
                 print(item)
                 # Check to see if need to print student name
@@ -79,7 +82,7 @@ class View(object):
     @staticmethod
     def view_edit_record(record_index):
         print('The []th record has been edited and is shown below:'.format(record_index))
-        print(potatoesList[record_index-1])
+        print(potatoesList[record_index - 1])
         print_student_name()
 
     # Delete record

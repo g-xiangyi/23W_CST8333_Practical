@@ -11,15 +11,17 @@
 #
 
 # Importing classes
-from model.ModelDto import potatoesList
+import model.ModelDto
+import view.View
+from model import ModelDto
 
 
 # Creating Controller class
-class Controller(object):
+class Controller:
 
-    def __init__(self, model, view):
-        self.model = model
-        self.view = view
+    def __init__(self, cmodel, cview):
+        self.cmodel = cmodel
+        self.cview = cview
 
     # Load partial dataset
     def load_partial_ds(self, file_name, file_size):
@@ -33,12 +35,12 @@ class Controller(object):
 
     # Reload partial dataset
     def reload_partial_ds(self, file_name, file_size):
-        potatoesList.clear()
+        model.potatoesList.clear()
         self.model.create_dataset_partial()
 
     # Reload full dataset
     def reload_full_ds(self, file_name):
-        potatoesList.clear()
+        model.potatoesList.clear()
         self.model.create_dataset(file_name)
 
     # Display full dataset

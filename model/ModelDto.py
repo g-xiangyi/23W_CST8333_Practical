@@ -18,14 +18,14 @@ recordObject = dict()
 columnNames = list()
 
 # Creating a list to be used to store the dataset
-potatoesList = list()
+potatoesList = list(columnNames)
 
 
 ################################
 # Creating Model class
-class Model(object):
+class Model:
     def __init__(self):
-        self._item_type = 'potatoes_production'
+        pass
 
     @property
     def item_type(self):

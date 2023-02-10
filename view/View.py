@@ -11,10 +11,11 @@
 #
 
 # Importing dto
-from model.ModelDto import potatoesList
+from model.ModelDto import potatoesList, print_student_name
+
 
 # Creating View class
-class View(object):
+class View:
 
     # Method to display full dataset
     @staticmethod

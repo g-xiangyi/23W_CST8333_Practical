@@ -32,11 +32,12 @@ def main():
         c.load_partial_ds(ds_name, ds_size)
         c.show_dataset()
         print('The dataset size is {}'.format(len(potatoesList)))
+        print(columnNames)
 
-    test_persist_ds = True
+    test_persist_ds = False
     if test_persist_ds:
         print('####### Test: Save dataset')
-        new_ds_name = input('Enter name of new dataset (e.g. abc.cvs): ')
+        new_ds_name = input('Enter name of new dataset (e.g. abc.csv): ')
         c.persist_memory_ds(new_ds_name)
 
     test_reload_ds = False
@@ -58,29 +59,32 @@ def main():
         c.show_range_ds(4, 6)
         print_student_name()
 
-    test_create_new_record = False
+    test_create_new_record = True
     if test_create_new_record:
+        print("####### Test: Create a new ")
+        print("3")
+        print(columnNames)
         new_record = dict()
-        new_record[columnNames[0]] = '2022'
-        new_record[columnNames[1]] = 'Ontario'
-        new_record[columnNames[2]] = '2022A000235'
-        new_record[columnNames[3]] = 'Production, potatoes'
-        new_record[columnNames[4]] = 'Hundredweight'
-        new_record[columnNames[5]] = '156'
-        new_record[columnNames[6]] = 'thousands'
-        new_record[columnNames[7]] = '3'
-        new_record[columnNames[8]] = 'v47167'
-        new_record[columnNames[9]] = '7.3'
-        new_record[columnNames[10]] = '23456'
-        new_record[columnNames[11]] = ''
-        new_record[columnNames[12]] = ''
-        new_record[columnNames[13]] = ''
-        new_record[columnNames[14]] = '0'
+        new_record[columnNames[0]] = "2022"
+        new_record[columnNames[1]] = "Ontario"
+        new_record[columnNames[2]] = "2022A000235"
+        new_record[columnNames[3]] = "Production, potatoes"
+        new_record[columnNames[4]] = "Hundredweight"
+        new_record[columnNames[5]] = "156"
+        new_record[columnNames[6]] = "thousands"
+        new_record[columnNames[7]] = "3"
+        new_record[columnNames[8]] = "v47167"
+        new_record[columnNames[9]] = "7.3"
+        new_record[columnNames[10]] = "23456"
+        new_record[columnNames[11]] = ""
+        new_record[columnNames[12]] = ""
+        new_record[columnNames[13]] = ""
+        new_record[columnNames[14]] = "0"
 
         c.insert_record(new_record)
-        c.view.show_dataset()
+        c.cview.show_dataset()
 
-    test_select_edit_record = True
+    test_select_edit_record = False
     if test_select_edit_record:
         print('####### Test: Select and edit a record object')
         n_record = input('Enter record number to be edited(1:{}): '.format(len(potatoesList)))
@@ -88,7 +92,7 @@ def main():
         assert ix_record_edited > 0
         assert ix_record_edited <= len(potatoesList)
         c.update_record(ix_record_edited)
-        c.view.show_dataset()
+        c.cview.show_dataset()
 
     test_select_delete_record = False
     if test_select_delete_record:
@@ -97,7 +101,7 @@ def main():
         assert ix_record_edited > 0
         assert ix_record_edited <= len(potatoesList)
         c.delete_record(ix_record_edited)
-        c.view.show_dataset()
+        c.cview.show_dataset()
 
     print('####### End status:')
     print('The dataset size is {}. The program is finished.'.format(len(potatoesList)))

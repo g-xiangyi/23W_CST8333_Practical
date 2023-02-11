@@ -34,12 +34,12 @@ class Controller:
 
     # Reload partial dataset
     def reload_partial_ds(self, file_name, file_size):
-        self.cmodel.potatoesList.clear()
-        self.cmodel.create_dataset_partial()
+        potatoesList.clear()
+        self.cmodel.create_dataset_partial(file_name, file_size)
 
     # Reload full dataset
     def reload_full_ds(self, file_name):
-        self.cmodel.potatoesList.clear()
+        potatoesList.clear()
         self.cmodel.create_dataset(file_name)
 
     # Display full dataset
@@ -48,7 +48,7 @@ class Controller:
 
     # Show single record
     def show_single_ds(self, item_index):
-        self.cview.view_load_partial_ds(item_index, item_index)
+        self.cview.show_partial_dataset(item_index, item_index)
 
     # Show a range of data
     def show_range_ds(self, start_point, end_point):

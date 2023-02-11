@@ -15,10 +15,11 @@ import csv
 ################################
 # Creating a record object
 recordObject = dict()
+# ColumnNames holds the names of each attribute
 columnNames = list()
 
-# Creating a list to be used to store the dataset
-potatoesList = list(columnNames)
+# Creating a list to be used to store the dataset; stores the actual values. Each item in the list is a recordObject
+potatoesList = list()
 
 
 ################################
@@ -114,7 +115,7 @@ class Model:
     # Method to update record
     @staticmethod
     def update_record(record_index):
-        print('The {}th record has been selected, and is shown below:').format(record_index)
+        print('The {}th record has been selected, and is shown below:'.format(record_index))
         print(potatoesList[record_index - 1])
         while True:
             key = input('Type name of column to edit:')

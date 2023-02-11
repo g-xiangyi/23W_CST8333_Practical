@@ -25,7 +25,7 @@ potatoesList = list(columnNames)
 # Creating Model class
 class Model:
     def __init__(self):
-        pass
+        self._item_type = 'potatoes production'
 
     @property
     def item_type(self):

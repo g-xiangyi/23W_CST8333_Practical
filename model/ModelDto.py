@@ -95,8 +95,8 @@ class Model:
     def save_dataset(dataset_name):
         try:
             with open(dataset_name, mode='w') as csv_file:
-                fieldNames = columnNames
-                writer = csv.DictWriter(csv_file, fieldNames=fieldNames)
+                fieldnames = columnNames
+                writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
                 writer.writeheader()
                 for row in potatoesList:
                     writer.writerow(row)

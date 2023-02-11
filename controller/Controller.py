@@ -19,8 +19,8 @@ from view.View import View
 class Controller:
 
     def __init__(self, cmodel, cview):
-        self.cmodel = cmodel.Model()
-        self.cview = cview.View()
+        self.cmodel = Model()
+        self.cview = View()
 
     # Load partial dataset
     def load_partial_ds(self, file_name, file_size):

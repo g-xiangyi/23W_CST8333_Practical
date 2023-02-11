@@ -33,7 +33,7 @@ def main():
         c.show_dataset()
         print('The dataset size is {}'.format(len(potatoesList)))
 
-    test_persist_ds = False
+    test_persist_ds = True
     if test_persist_ds:
         print('####### Test: Save dataset')
         new_ds_name = input('Enter name of new dataset (e.g. abc.cvs): ')
@@ -58,7 +58,7 @@ def main():
         c.show_range_ds(4, 6)
         print_student_name()
 
-    test_create_new_record = True
+    test_create_new_record = False
     if test_create_new_record:
         new_record = dict()
         new_record[columnNames[0]] = '2022'
@@ -83,7 +83,7 @@ def main():
     test_select_edit_record = True
     if test_select_edit_record:
         print('####### Test: Select and edit a record object')
-        n_record = input('Enter record number to be edited(1:{}): '.format(len(model.potatoesList)))
+        n_record = input('Enter record number to be edited(1:{}): '.format(len(potatoesList)))
         ix_record_edited = int(n_record)
         assert ix_record_edited > 0
         assert ix_record_edited <= len(potatoesList)

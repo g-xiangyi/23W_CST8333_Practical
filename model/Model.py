@@ -13,25 +13,28 @@
 import csv
 from collections import namedtuple
 from typing import NamedTuple
-from pyrecord import Record
+from dataclasses import dataclass
+
 
 ################################
 # Creating a record object/Data Transfer Object used for transferring data between layers of the application
-# class RecordObject(NamedTuple):
-#     ref_date: int = ""
-#     geo: str = ""
-#     dguid: str = ""
-#     apv: str = ""
-#     uom: str = ""
-#     uom_id: int = ""
-#     scalar_id: int = ""
-#     vtor: str = ""
-#     coord: str = ""
-#     value: str = ""
-#     status: str = ""
-#     sym: str = ""
-#     terminated: str = ""
-#     decimals: int = ""
+@dataclass
+class RecordObject:
+    ref_date: int
+    geo: str
+    dguid: str
+    apv: str
+    uom: str
+    uom_id: int
+    scalar_id: int
+    vtor: str
+    coord: str
+    value: str
+    status: str
+    sym: str
+    terminated: str
+    decimals: int
+
 
 # ColumnNames holds the names of each attribute
 columnNames = (
@@ -39,15 +42,12 @@ columnNames = (
     'terminated',
     'decimals')
 
+columnNames = list()
 # RecordObject = dict('RecordObject', columnNames)
 
 # Creating a list to be used to store the dataset; stores the actual values. Each item in the list is a recordObject
 # Save the 100 RecordObject objects into this list!
 potatoesList = list()
-
-################################
-# Creating RecordObject
-RecordObject = Record.create_type("Record", columnNames)
 
 
 ################################
@@ -69,49 +69,50 @@ class Model:
     @staticmethod
     def create_dataset_partial(dataset_name, dataset_size):
         try:
-            # Iterate 100 times to save the first 100 records from 32100358.csv into 100 separate RecordObject() objects!
-            with open(dataset_name) as csvfile:
-                filereader = csv.DictReader(csvfile)
-                for row in enumerate(filereader):
-                    record_i = RecordObject(
-                        ref_date=row[0].strip(),
-                        geo=row[1].strip(),
-                        dguid=row[2].strip(),
-                        apv=row[3].strip(),
-                        uom=row[4].strip(),
-                        uom_id=row[5].strip(),
-                        scalar_id=row[6].strip(),
-                        vtor=row[7].strip(),
-                        coord=row[8].strip(),
-                        value=row[9].strip(),
-                        status=row[10].strip(),
-                        sym=row[11].strip(),
-                        terminated=row[12].strip(),
-                        decimals=row[13].strip()
-                    )
-                    potatoesList.append(record_i)
-                    if row == 99:
-                        pass
+        #     # Iterate 100 times to save the first 100 records from 32100358.csv into 100 separate RecordObject() objects!
+        #     with open(dataset_name, mode='r') as csvfile:
+        #         filereader = csv.reader(csvfile)
+        #         for row in enumerate(filereader):
+        #             record_i = RecordObject(
+        #                 ref_date=int(row[0]),
+        #                 geo=row[1],
+        #                 dguid=row[2],
+        #                 apv=row[3],
+        #                 uom=row[4],
+        #                 uom_id=int(row[5]),
+        #                 scalar_id=int(row[6]),
+        #                 vtor=row[7],
+        #                 coord=row[8],
+        #                 value=row[9],
+        #                 status=row[10],
+        #                 sym=row[11],
+        #                 terminated=row[12],
+        #                 decimals=int(row[13])
+        #             )
+        #             potatoesList.append(record_i)
+        #             if row == 99:
+        #                 pass
 
-            # with open(dataset_name, mode='r') as csv_file:
-            #     csv_reader = csv.DictReader(csv_file)
-            #
-            #     # Get columnn names
-            #     global columnNames
-            #     columnNames = csv_reader.fieldnames
-            #
-            #     line_count = 0
-            #
-            #     for row in csv_reader:
-            #         if line_count == 0:
-            #             line_count += 1
-            #         elif line_count > dataset_size:
-            #             break
-            #
-            #         global RecordObject
-            #         RecordObject = row
-            #         potatoesList.append(RecordObject)
-            #         line_count += 1
+            with open(dataset_name, mode='r') as csv_file:
+                csv_reader = csv.DictReader(csv_file)
+
+                # Get columnn names
+                global columnNames
+                columnNames = csv_reader.fieldnames
+
+                line_count = 0
+# Look at this for enumerate() to use as a counter
+#         https: // realpython.com / python - enumerate /
+                for row in csv_reader:
+                    if line_count == 0:
+                        line_count += 1
+                    elif line_count > dataset_size:
+                        break
+
+                    global RecordObject
+                    RecordObject = row
+                    potatoesList.append(RecordObject)
+                    line_count += 1
 
         except Exception as e:
             print('The dataset cannot be opened')
@@ -126,8 +127,8 @@ class Model:
                 csv_reader = csv.DictReader(csv_file)
 
             # Get column names
-            global columnNames
-            columnNames = csv_reader.fieldnames
+            # global columnNames
+            # columnNames = csv_reader.fieldnames
             line_count = 0
 
             for row in csv_reader:

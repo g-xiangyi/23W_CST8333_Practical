@@ -80,21 +80,131 @@ class Controller:
 
     # Method Selector allows user to select which operation to enact based on user input
     def method_selector(self):
-        print('This program demonstrates basic CRUD operations on the 32100358.csv file.')
-        print('Please ensure file 32100358.csv is filed under the main module to ensure program functionality')
-        print('This program offers the following functionalities: ')
-        print('Press 1 to reload data from the dataset')
-        print('Press 2 to write to a new .csv file')
-        print('Press 3 to select records to view')
-        print('Press 4 to create and store a new record')
-        print('Press 5 to edit an existing record')
-        print('Press 6 delete an existing record')
-        print_student_name()
-        no = input('Please input a number from 1-6 (e.g. \'2\'): ')
+        ds_name = "32100358.csv"
+        ds_size = len(potatoesList)
+        while True:
+            print('This program demonstrates basic CRUD operations on the 32100358.csv file.')
+            print('Please ensure file 32100358.csv is filed under the main module to ensure program functionality')
+            print('This program offers the following functionalities: ')
+            print('Press 1 to reload data from the dataset')
+            print('Press 2 to write to a new .csv file')
+            print('Press 3 to select records to view')
+            print('Press 4 to create and store a new record')
+            print('Press 5 to edit an existing record')
+            print('Press 6 delete an existing record')
+            print_student_name()
 
-        if no == '1':
-            print('test successful')
-        else:
-            print('Please input a number from 1 to 6')
+            no = input('Please input a number from 1-6 (e.g. \'2\'): ')
+
+            if no == '1':
+                print('####### Test: reload data from the dataset')
+                ds_size = int(input('How many data records to reload '))
+                self.reload_partial_ds(ds_name, ds_size)
+                self.show_dataset()
+
+                print('test successful')
+
+                while True:
+                    test_again = input('Do another functionality (y/n)? ')
+                    if test_again == 'n':
+                        exit(0)
+                    elif test_again == 'y':
+                        break
+                    else:
+                        print('Choose y/n, please!')
+
+            elif no == '2':
+                print('####### Test: write to a new .csv file')
+                new_ds_name = input('Enter name of new dataset (e.g. abc.csv): ')
+                self.persist_memory_ds(new_ds_name)
+
+                print('test successful')
+
+                while True:
+                    test_again = input('Do another functionality (y/n)? ')
+                    if test_again == 'n':
+                        exit(0)
+                    elif test_again == 'y':
+                        break
+                    else:
+                        print('Choose y/n, please!')
+
+            elif no == '3':
+                print('####### Test: select records to view')
+                while True:
+                    start_record = int(input('Enter the start record number of the records block: '))
+                    end_record = int(input('Enter the end record number of the records block: '))
+                    if 0 < start_record <= end_record <= ds_size:
+                        self.show_range_ds(start_record, end_record)
+                        print_student_name()
+
+                        print('test successful')
+                        break
+                    else:
+                        print('Invalid start and/or end record numbers! Try again!')
+
+                while True:
+                    test_again = input('Do another functionality (y/n)? ')
+                    if test_again == 'n':
+                        exit(0)
+                    elif test_again == 'y':
+                        break
+                    else:
+                        print('Choose y/n, please!')
+
+            elif no == '4':
+                print('####### Test: create and store a new record')
+                new_record = dict()
+                new_record[model.Model.columnNames[0]] = "2022"
+                new_record[model.Model.columnNames[1]] = "Ontario"
+                new_record[model.Model.columnNames[2]] = "2022A000235"
+                new_record[model.Model.columnNames[3]] = "Production, potatoes"
+                new_record[model.Model.columnNames[4]] = "Hundredweight"
+                new_record[model.Model.columnNames[5]] = "156"
+                new_record[model.Model.columnNames[6]] = "thousands"
+                new_record[model.Model.columnNames[7]] = "3"
+                new_record[model.Model.columnNames[8]] = "v47167"
+                new_record[model.Model.columnNames[9]] = "7.3"
+                new_record[model.Model.columnNames[10]] = "23456"
+                new_record[model.Model.columnNames[11]] = ""
+                new_record[model.Model.columnNames[12]] = ""
+                new_record[model.Model.columnNames[13]] = ""
+                new_record[model.Model.columnNames[14]] = "0"
+
+                self.insert_record(new_record)
+                self.cview.show_dataset()
+
+                print('test successful')
+
+                while True:
+                    test_again = input('Do another functionality (y/n)? ')
+                    if test_again == 'n':
+                        exit(0)
+                    elif test_again == 'y':
+                        break
+                    else:
+                        print('Choose y/n, please!')
+
+            elif no == '5':
+                print('####### Test: edit an existing record')
+                while True:
+                    n_record = input('Enter record number to be edited(1:{}): '.format(len(potatoesList)))
+                    ix_record_edited = int(n_record)
+                    if 0 < ix_record_edited <= ds_size:
+                        self.update_record(ix_record_edited)
+                        self.cview.show_dataset()
+
+                        print('test successful')
+
+                while True:
+                    test_again = input('Do another functionality (y/n)? ')
+                    if test_again == 'n':
+                        exit(0)
+                    elif test_again == 'y':
+                        break
+                    else:
+                        print('Choose y/n, please!')
 
 
+            else:
+                print('Please input a number from 1 to 6')

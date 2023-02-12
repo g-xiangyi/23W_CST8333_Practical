@@ -69,7 +69,7 @@ class View:
     # Save dataset
     @staticmethod
     def view_save_ds(file_name):
-        print('Saving dataset []'.format(file_name))
+        print('Saving dataset {}'.format(file_name))
         print_student_name()
 
     # Insert record

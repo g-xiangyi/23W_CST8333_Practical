@@ -26,8 +26,6 @@ def main():
 
     c = Controller(mmodel, mview)
 
-    c.method_selector()
-
     test_load_partial_ds = True
     if test_load_partial_ds:
         print('####### Test: Load partial dataset')
@@ -35,6 +33,9 @@ def main():
         c.show_dataset()
         print('The dataset size is {}'.format(len(model.Model.potatoesList)))
         print(model.Model.columnNames)
+
+    c.method_selector()
+
 
     test_persist_ds = False
     if test_persist_ds:

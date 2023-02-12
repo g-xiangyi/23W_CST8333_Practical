@@ -72,8 +72,8 @@ class Model:
             # Iterate 100 times to save the first 100 records from 32100358.csv into 100 separate RecordObject() objects!
             with open(dataset_name) as csvfile:
                 filereader = csv.DictReader(csvfile)
-                for row in filereader:
-                    RecordObject(
+                for row in enumerate(filereader):
+                    record_i = RecordObject(
                         ref_date=row[0].strip(),
                         geo=row[1].strip(),
                         dguid=row[2].strip(),
@@ -89,7 +89,7 @@ class Model:
                         terminated=row[12].strip(),
                         decimals=row[13].strip()
                     )
-                    potatoesList.append(RecordObject())
+                    potatoesList.append(record_i)
                     if row == 99:
                         pass
 

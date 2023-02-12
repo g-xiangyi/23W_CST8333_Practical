@@ -11,7 +11,7 @@
 #
 
 # Importing dto
-from model.Model import potatoesList, print_student_name
+from model.Model import potatoesList
 
 
 # Creating View class
@@ -69,7 +69,7 @@ class View:
     # Save dataset
     @staticmethod
     def view_save_ds(file_name):
-        print('Saving dataset []'.format(file_name))
+        print('Saving dataset {}'.format(file_name))
         print_student_name()
 
     # Insert record
@@ -92,3 +92,7 @@ class View:
         print('The []th record shown below has been deleted from the dataset:'.format(record_index))
         print(deleted_record)
         print_student_name()
+
+# Method to print author name
+def print_student_name():
+    print('Program written by Amy Guo')

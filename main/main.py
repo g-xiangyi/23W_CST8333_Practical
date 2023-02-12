@@ -10,9 +10,11 @@
 # ################################
 #
 import model.Model
-from model.Model import columnNames, potatoesList, ModelDto, print_student_name
-from view.View import View
-from controller.Controller import Controller
+import view.View
+import controller.Controller
+#from model.Model import columnNames, potatoesList, ModelDto, print_student_name
+#from view.View import View
+#from controller.Controller import Controller
 
 
 # Driver method runs entire program
@@ -21,12 +23,10 @@ def main():
     ds_name = "32100358.csv"
     ds_size = 10
 
-    mmodel = ModelDto()
-    mview = View()
+    mmodel = model.Model.ModelDto()
+    mview = view.View.View()
 
-    c = Controller(mmodel, mview)
-
-    c.method_selector()
+    c = controller.Controller.Controller(mmodel, mview)
 
     test_load_partial_ds = True
     if test_load_partial_ds:
@@ -34,7 +34,8 @@ def main():
         c.load_partial_ds(ds_name, ds_size)
         c.show_dataset()
         print('The dataset size is {}'.format(len(model.Model.potatoesList)))
-        print(model.Model.columnNames)
+
+    c.method_selector()
 
     test_persist_ds = False
     if test_persist_ds:
@@ -53,15 +54,15 @@ def main():
     if test_select_single_ds:
         print('####### Test: Select and show the 3rd record object')
         c.show_single_ds(3)
-        print_student_name()
+        view.View.print_student_name()
 
     test_select_show_multiple_ds = False
     if test_select_show_multiple_ds:
         print('####### Test: Select and show the 4th to 6th record objects')
         c.show_range_ds(4, 6)
-        print_student_name()
+        view.View.print_student_name()
 
-    test_create_new_record = True
+    test_create_new_record = False
     if test_create_new_record:
         print("####### Test: Create a new record")
         print(model.Model.columnNames)
@@ -91,21 +92,21 @@ def main():
         n_record = input('Enter record number to be edited(1:{}): '.format(len(potatoesList)))
         ix_record_edited = int(n_record)
         assert ix_record_edited > 0
-        assert ix_record_edited <= len(potatoesList)
+        assert ix_record_edited <= len(model.Model.potatoesList)
         c.update_record(ix_record_edited)
         c.cview.show_dataset()
 
     test_select_delete_record = False
     if test_select_delete_record:
-        n_record = input('Enter record number to be deleted(1:{}): '.format(len(potatoesList)))
+        n_record = input('Enter record number to be deleted(1:{}): '.format(len(model.Model.potatoesList)))
         ix_record_edited = int(n_record)
         assert ix_record_edited > 0
-        assert ix_record_edited <= len(potatoesList)
+        assert ix_record_edited <= len(model.Model.potatoesList)
         c.delete_record(ix_record_edited)
         c.cview.show_dataset()
 
     print('####### End status:')
-    print('The dataset size is {}. The program is finished.'.format(len(potatoesList)))
+    print('The dataset size is {}. The program is finished.'.format(len(model.Model.potatoesList)))
 
 
 # Press the green button in the gutter to run the script

@@ -15,10 +15,29 @@ import csv
 from dataclasses import dataclass
 
 ################################
-# Creating a record object
-recordObject = dict()
+# Creating a record object DTO
+#recordObject = dict()
+recordObjectDTO = dict( )
+
 # ColumnNames holds the names of each attribute
 columnNames = list()
+columnNames1 = [
+    "ref_date",
+    "geo",
+    "dguid",
+    "apv",
+    "uom",
+    "uom_id",
+    "scalar_id",
+    "vector",
+    "coord",
+    "value",
+    "decimals",
+    "status",
+    "sym",
+    "terminated",
+    "decimals"
+]
 
 # Creating a list to be used to store the dataset; stores the actual values. Each item in the list is a recordObject
 potatoesList = list()
@@ -28,20 +47,6 @@ potatoesList = list()
 # Creating ModelDTO class - this is a data transfer object that will be used to transfer information to and from the dataset
 @dataclass
 class ModelDto:
-    ref_date: int
-    geo: str
-    dguid: str
-    apv: str
-    uom: str
-    uom_id: int
-    scalar_id: int
-    vector: str
-    coord: str
-    value: str
-    decimals: int
-    status: str = ""
-    sym: str = ""
-    terminated: str = ""
 
     def __init__(self):
         self._item_type = 'potatoes production'
@@ -136,12 +141,12 @@ class ModelDto:
         print('The {}th record has been selected, and is shown below:'.format(record_index))
         print(potatoesList[record_index - 1])
         while True:
-            key = input('Type name of column to edit:')
+            key = input('Type name of column to edit: ')
             print(key + ' : ' + potatoesList[record_index - 1][key])
             v = input('Enter new value for column: ')
             potatoesList[record_index - 1][key] = v
 
-            s = input('Do you want to edit another column (y/n)?')
+            s = input('Do you want to edit another column (y/n)? ')
             if s == 'n':
                 break
 
@@ -152,7 +157,3 @@ class ModelDto:
         del potatoesList[record_index - 1]
         return record
 
-
-# Method to print author name
-def print_student_name():
-    print('Program written by Amy Guo')

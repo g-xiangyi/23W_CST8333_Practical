@@ -15,16 +15,17 @@
 # implement switch case for selecting which operation to do
 
 # Importing classes
-from model.Model import recordObject, columnNames, potatoesList, ModelDto, print_student_name
-from view.View import View
-
+#from model.Model import recordObject, columnNames, potatoesList, ModelDto, print_student_name
+#from view.View import View
+import model.Model
+import view.View
 
 # Creating Controller class
 class Controller:
 
-    def __init__(self, cmodel: ModelDto(), cview: View()):
-        self.cmodel: ModelDto() = cmodel
-        self.cview: View() = cview
+    def __init__(self, cmodel, cview):
+        self.cmodel = cmodel
+        self.cview = cview
 
     # Load partial dataset
     def load_partial_ds(self, file_name, file_size):
@@ -38,12 +39,12 @@ class Controller:
 
     # Reload partial dataset
     def reload_partial_ds(self, file_name, file_size):
-        potatoesList.clear()
+        model.Model.potatoesList.clear()
         self.cmodel.create_dataset_partial(file_name, file_size)
 
     # Reload full dataset
     def reload_full_ds(self, file_name):
-        potatoesList.clear()
+        model.Model.potatoesList.clear()
         self.cmodel.create_dataset(file_name)
 
     # Display full dataset
@@ -80,21 +81,118 @@ class Controller:
 
     # Method Selector allows user to select which operation to enact based on user input
     def method_selector(self):
-        print('This program demonstrates basic CRUD operations on the 32100358.csv file.')
-        print('Please ensure file 32100358.csv is filed under the main module to ensure program functionality')
-        print('This program offers the following functionalities: ')
-        print('Press 1 to reload data from the dataset')
-        print('Press 2 to write to a new .csv file')
-        print('Press 3 to select records to view')
-        print('Press 4 to create and store a new record')
-        print('Press 5 to edit an existing record')
-        print('Press 6 delete an existing record')
-        print_student_name()
-        no = input('Please input a number from 1-6 (e.g. \'2\'): ')
 
-        if no == '1':
-            print('test successful')
-        else:
-            print('Please input a number from 1 to 6')
+        while True:
+            print('#########################################################################')
+            print('This program demonstrates basic CRUD operations on the 32100358.csv file.')
+            print('Please ensure file 32100358.csv is filed under the main module to ensure program functionality')
+            print('This program offers the following functionalities: ')
+            print('Press 1 to reload data from the dataset')
+            print('Press 2 to write to a new .csv file')
+            print('Press 3 to select records to view')
+            print('Press 4 to create and store a new record')
+            print('Press 5 to edit an existing record')
+            print('Press 6 delete an existing record')
+            view.View.print_student_name()
+            no = input('Please input a number from 1-6 (e.g. \'2\'): ')
+
+            if no == '1':
+                print('####### Test: Reload dataset')
+                ds_name = "32100358.csv"
+                ds_size = 12
+                self.reload_partial_ds(ds_name, ds_size)
+                self.show_dataset()
+
+                test_again = input('Test another functionality (y/n)? ')
+                if test_again == "n":
+                    view.View.print_student_name()
+                    exit(0)
+
+            elif no == '2':
+                print('####### Test: Save dataset')
+                new_ds_name = input('Enter name of new dataset (e.g. abc.csv): ')
+                self.persist_memory_ds(new_ds_name)
+
+                test_again = input('Test another functionality (y/n)? ')
+                if test_again == "n":
+                    view.View.print_student_name()
+                    exit(0)
+
+            elif no == '3':
+                print('####### Test: Select and show the 4th to 6th record objects')
+                self.show_range_ds(4, 6)
+                view.View.print_student_name()
+
+                test_again = input('Test another functionality (y/n)? ')
+                if test_again == "n":
+                    view.View.print_student_name()
+                    exit(0)
+
+            elif no == '4':
+                print("####### Test: Create a new record")
+                new_record = dict()
+                new_record[model.Model.columnNames[0]] = "2022"
+                new_record[model.Model.columnNames[1]] = "Ontario"
+                new_record[model.Model.columnNames[2]] = "2022A000235"
+                new_record[model.Model.columnNames[3]] = "Production, potatoes"
+                new_record[model.Model.columnNames[4]] = "Hundredweight"
+                new_record[model.Model.columnNames[5]] = "156"
+                new_record[model.Model.columnNames[6]] = "thousands"
+                new_record[model.Model.columnNames[7]] = "3"
+                new_record[model.Model.columnNames[8]] = "v47167"
+                new_record[model.Model.columnNames[9]] = "7.3"
+                new_record[model.Model.columnNames[10]] = "23456"
+                new_record[model.Model.columnNames[11]] = ""
+                new_record[model.Model.columnNames[12]] = ""
+                new_record[model.Model.columnNames[13]] = ""
+                new_record[model.Model.columnNames[14]] = "0"
+
+                self.insert_record(new_record)
+                self.cview.show_dataset()
+
+                test_again = input('Test another functionality (y/n)? ')
+                if test_again == "n":
+                    view.View.print_student_name()
+                    exit(0)
+
+            elif no == '5':
+                print('####### Test: Select and edit a record object')
+                self.cview.show_dataset()
+                while True:
+                    n_record = input('Enter record number to be edited(1:{}): '.format(len(model.Model.potatoesList)))
+                    ix_record_edited = int(n_record)
+                    if 0 < ix_record_edited <= len(model.Model.potatoesList):
+                        self.update_record(ix_record_edited)
+                        self.cview.show_dataset()
+
+                        test_again = input('Test another functionality (y/n)? ')
+                        if test_again == "n":
+                            view.View.print_student_name()
+                            exit(0)
+                        else:
+                            break
+                    else:
+                        print('Invalid number. Try again!')
+
+            elif no == '6':
+                print('####### Test: Select and delete a record object')
+                self.cview.show_dataset()
+                while True:
+                    n_record = input('Enter record number to be deleted(1:{}): '.format(len(model.Model.potatoesList)))
+                    ix_record_edited = int(n_record)
+                    if 0 < ix_record_edited <= len(model.Model.potatoesList):
+                        self.delete_record(ix_record_edited)
+                        self.cview.show_dataset()
+
+                        test_again = input('Test another functionality (y/n)? ')
+                        if test_again == "n":
+                            view.View.print_student_name()
+                            exit(0)
+                        else:
+                            break
+                    else:
+                        print('Invalid number. Try again!')
+            else:
+                print('Invalid number!')
 
 

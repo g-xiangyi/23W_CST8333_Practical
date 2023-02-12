@@ -1,4 +1,13 @@
 ##########################################################
+#  Create a record object
+recordObject = dict()
+column_names = list()
+
+##########################################################
+#  Create a list (table) that is used as the dataset
+potatoesProduction = list()
+
+##########################################################
 #  Create class Model
 import csv
 

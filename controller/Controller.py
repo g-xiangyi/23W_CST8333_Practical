@@ -91,7 +91,7 @@ class Controller:
             print('Press 3 to select records to view')
             print('Press 4 to create and store a new record')
             print('Press 5 to edit an existing record')
-            print('Press 6 delete an existing record')
+            print('Press 6 to delete an existing record')
             print_student_name()
 
             no = input('Please input a number from 1-6 (e.g. \'2\'): ')
@@ -195,6 +195,9 @@ class Controller:
                         self.cview.show_dataset()
 
                         print('test successful')
+                        break
+                    else:
+                        print('Invalid record number! Try again!')
 
                 while True:
                     test_again = input('Do another functionality (y/n)? ')
@@ -205,6 +208,28 @@ class Controller:
                     else:
                         print('Choose y/n, please!')
 
+            elif no == '6':
+                print('####### Test: delete an existing record')
+                while True:
+                    n_record = input('Enter record number to be deleted(1:{}): '.format(len(potatoesList)))
+                    ix_record_edited = int(n_record)
+                    if 0 < ix_record_edited <= ds_size:
+                        self.delete_record(ix_record_edited)
+                        self.cview.show_dataset()
+
+                        print('test successful')
+                        break
+                    else:
+                        print('Choose y/n, please!')
+
+                while True:
+                    test_again = input('Do another functionality (y/n)? ')
+                    if test_again == 'n':
+                        exit(0)
+                    elif test_again == 'y':
+                        break
+                    else:
+                        print('Choose y/n, please!')
 
             else:
                 print('Please input a number from 1 to 6')

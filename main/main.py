@@ -8,9 +8,10 @@
 # ################################
 # Main driver method
 # ################################
-#
+
+import persistence.DataStore
 import model.Model
-from model.Model import columnNames, potatoesList, ModelDto, print_student_name
+from model.Model import potatoesList, Model, print_student_name
 from view.View import View
 from controller.Controller import Controller
 
@@ -21,20 +22,22 @@ def main():
     ds_name = "32100358.csv"
     ds_size = 10
 
-    mmodel = ModelDto()
+    mmodel = Model()
     mview = View()
 
     c = Controller(mmodel, mview)
 
-    c.method_selector()
-
+# THIS MUST BE LOADED BEFORE ANYTHING ELSE IN ORDER TO LOAD THE DATASET
     test_load_partial_ds = True
     if test_load_partial_ds:
         print('####### Test: Load partial dataset')
-        c.load_partial_ds(ds_name, ds_size)
+        c.load_100_records(ds_name, ds_size)
         c.show_dataset()
-        print('The dataset size is {}'.format(len(model.Model.potatoesList)))
-        print(model.Model.columnNames)
+        print('success')
+ #       print('The dataset size is {}'.format(len(model.Model.potatoesList)))
+ #       print(model.Model.columnNames)
+
+    c.method_selector()
 
     test_persist_ds = False
     if test_persist_ds:

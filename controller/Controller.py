@@ -15,19 +15,19 @@
 # implement switch case for selecting which operation to do
 
 # Importing classes
-from model.Model import recordObject, columnNames, potatoesList, ModelDto, print_student_name
+from model.Model import RecordObject, columnNames, potatoesList, Model, print_student_name
 from view.View import View
 
 
 # Creating Controller class
 class Controller:
 
-    def __init__(self, cmodel: ModelDto(), cview: View()):
-        self.cmodel: ModelDto() = cmodel
+    def __init__(self, cmodel: Model(), cview: View()):
+        self.cmodel: Model() = cmodel
         self.cview: View() = cview
 
     # Load partial dataset
-    def load_partial_ds(self, file_name, file_size):
+    def load_100_records(self, file_name, file_size):
         self.cmodel.create_dataset_partial(file_name, file_size)
         self.cview.view_load_partial_ds(file_name, file_size)
 
@@ -39,6 +39,7 @@ class Controller:
     # Reload partial dataset
     def reload_partial_ds(self, file_name, file_size):
         potatoesList.clear()
+
         self.cmodel.create_dataset_partial(file_name, file_size)
 
     # Reload full dataset
@@ -81,7 +82,6 @@ class Controller:
     # Method Selector allows user to select which operation to enact based on user input
     def method_selector(self):
         print('This program demonstrates basic CRUD operations on the 32100358.csv file.')
-        print('Please ensure file 32100358.csv is filed under the main module to ensure program functionality')
         print('This program offers the following functionalities: ')
         print('Press 1 to reload data from the dataset')
         print('Press 2 to write to a new .csv file')
@@ -94,7 +94,6 @@ class Controller:
 
         if no == '1':
             print('test successful')
+
         else:
             print('Please input a number from 1 to 6')
-
-

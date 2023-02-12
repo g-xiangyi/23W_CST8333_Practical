@@ -14,7 +14,7 @@ import model.Model
 from model.Model import potatoesList, Model, print_student_name
 from view.View import View
 from controller.Controller import Controller
-
+import unittest
 
 # Driver method runs entire program
 def main():
@@ -111,6 +111,7 @@ def main():
     print('The dataset size is {}. The program is finished.'.format(len(potatoesList)))
 
 
-# Press the green button in the gutter to run the script
+# YOU NEED TO COMMENT THIS!!! Marks which methods to run upon clicking run program
 if __name__ == '__main__':
     main()
+    unittest.main()

@@ -81,6 +81,7 @@ class Controller:
 
     # Method Selector allows user to select which operation to enact based on user input
     def method_selector(self):
+        dataset_size = len(model.Model.potatoesList)
 
         while True:
             print('#########################################################################')
@@ -119,26 +120,77 @@ class Controller:
                     exit(0)
 
             elif no == '3':
-                print('####### Test: Select and show the 4th to 6th record objects')
-                self.show_range_ds(4, 6)
-                view.View.print_student_name()
+                print('####### Test: select records to view from the following records')
+                self.cview.show_dataset()
+                while True:
+                    start_record = int(input('Enter the start record number to view: '))
+                    end_record = int(input('Enter the start record number to view: '))
+                    if 1 <= start_record <= end_record <= dataset_size:
+                        self.show_range_ds(start_record, end_record)
+                        view.View.print_student_name()
 
-                test_again = input('Test another functionality (y/n)? ')
-                if test_again == "n":
-                    view.View.print_student_name()
-                    exit(0)
+                        test_again = input('Test another functionality (y/n)? ')
+                        if test_again == "n":
+                            view.View.print_student_name()
+                            exit(0)
+                        else:
+                            break
+                    else:
+                        print('Invalid numbers. Try again!')
 
             elif no == '4':
                 print("####### Test: Create a new record")
+                print('The following is an example:')
+                self.show_range_ds(1, 1)
                 new_record = dict()
-                new_record[model.Model.columnNames[0]] = "2022"
-                new_record[model.Model.columnNames[1]] = "Ontario"
-                new_record[model.Model.columnNames[2]] = "2022A000235"
-                new_record[model.Model.columnNames[3]] = "Production, potatoes"
-                new_record[model.Model.columnNames[4]] = "Hundredweight"
-                new_record[model.Model.columnNames[5]] = "156"
-                new_record[model.Model.columnNames[6]] = "thousands"
-                new_record[model.Model.columnNames[7]] = "3"
+                while True:
+                    in_value = input(
+                        'Enter the value to {} (e.g. 2022): '.format(model.Model.columnNames[0]))
+                    new_record[model.Model.columnNames[0]] = in_value
+                    break
+
+                while True:
+                    in_value = input(
+                        'Enter the value to {} (e.g. Ontario): '.format(model.Model.columnNames[1]))
+                    new_record[model.Model.columnNames[1]] = in_value
+                    break
+
+                while True:
+                    in_value = input(
+                        'Enter the value to {} (e.g. 2022A000235): '.format(model.Model.columnNames[2]))
+                    new_record[model.Model.columnNames[2]] = in_value
+                    break
+
+                while True:
+                    in_value = input(
+                        'Enter the value to {} (e.g. Production, potatoes): '.format(model.Model.columnNames[3]))
+                    new_record[model.Model.columnNames[3]] = in_value
+                    break
+
+                while True:
+                    in_value = input(
+                        'Enter the value to {} (e.g. Hundredweight): '.format(model.Model.columnNames[4]))
+                    new_record[model.Model.columnNames[4]] = in_value
+                    break
+
+                while True:
+                    in_value = input(
+                        'Enter the value to {} (e.g. 156): '.format(model.Model.columnNames[5]))
+                    new_record[model.Model.columnNames[5]] = in_value
+                    break
+
+                while True:
+                    in_value = input(
+                        'Enter the value to {} (e.g. thousands): '.format(model.Model.columnNames[6]))
+                    new_record[model.Model.columnNames[6]] = in_value
+                    break
+
+                while True:
+                    in_value = input(
+                        'Enter the value to {} (e.g. 3): '.format(model.Model.columnNames[7]))
+                    new_record[model.Model.columnNames[7]] = in_value
+                    break
+
                 new_record[model.Model.columnNames[8]] = "v47167"
                 new_record[model.Model.columnNames[9]] = "7.3"
                 new_record[model.Model.columnNames[10]] = "23456"
@@ -159,9 +211,9 @@ class Controller:
                 print('####### Test: Select and edit a record object')
                 self.cview.show_dataset()
                 while True:
-                    n_record = input('Enter record number to be edited(1:{}): '.format(len(model.Model.potatoesList)))
+                    n_record = input('Enter record number to be edited(1:{}): '.format(dataset_size))
                     ix_record_edited = int(n_record)
-                    if 0 < ix_record_edited <= len(model.Model.potatoesList):
+                    if 1 <= ix_record_edited <= dataset_size:
                         self.update_record(ix_record_edited)
                         self.cview.show_dataset()
 

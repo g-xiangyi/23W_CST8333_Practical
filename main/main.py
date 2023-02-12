@@ -9,8 +9,8 @@
 # Main driver method
 # ################################
 #
-
-from model.ModelDto import columnNames, potatoesList, Model, print_student_name
+import model.Model
+from model.Model import columnNames, potatoesList, ModelDto, print_student_name
 from view.View import View
 from controller.Controller import Controller
 
@@ -21,7 +21,7 @@ def main():
     ds_name = "32100358.csv"
     ds_size = 10
 
-    mmodel = Model()
+    mmodel = ModelDto()
     mview = View()
 
     c = Controller(mmodel, mview)
@@ -33,8 +33,8 @@ def main():
         print('####### Test: Load partial dataset')
         c.load_partial_ds(ds_name, ds_size)
         c.show_dataset()
-        print('The dataset size is {}'.format(len(potatoesList)))
-        print(columnNames)
+        print('The dataset size is {}'.format(len(model.Model.potatoesList)))
+        print(model.Model.columnNames)
 
     test_persist_ds = False
     if test_persist_ds:
@@ -63,25 +63,24 @@ def main():
 
     test_create_new_record = True
     if test_create_new_record:
-        print("####### Test: Create a new ")
-        print("3")
-        print(columnNames)
+        print("####### Test: Create a new record")
+        print(model.Model.columnNames)
         new_record = dict()
-        new_record[columnNames[0]] = "2022"
-        new_record[columnNames[1]] = "Ontario"
-        new_record[columnNames[2]] = "2022A000235"
-        new_record[columnNames[3]] = "Production, potatoes"
-        new_record[columnNames[4]] = "Hundredweight"
-        new_record[columnNames[5]] = "156"
-        new_record[columnNames[6]] = "thousands"
-        new_record[columnNames[7]] = "3"
-        new_record[columnNames[8]] = "v47167"
-        new_record[columnNames[9]] = "7.3"
-        new_record[columnNames[10]] = "23456"
-        new_record[columnNames[11]] = ""
-        new_record[columnNames[12]] = ""
-        new_record[columnNames[13]] = ""
-        new_record[columnNames[14]] = "0"
+        new_record[model.Model.columnNames[0]] = "2022"
+        new_record[model.Model.columnNames[1]] = "Ontario"
+        new_record[model.Model.columnNames[2]] = "2022A000235"
+        new_record[model.Model.columnNames[3]] = "Production, potatoes"
+        new_record[model.Model.columnNames[4]] = "Hundredweight"
+        new_record[model.Model.columnNames[5]] = "156"
+        new_record[model.Model.columnNames[6]] = "thousands"
+        new_record[model.Model.columnNames[7]] = "3"
+        new_record[model.Model.columnNames[8]] = "v47167"
+        new_record[model.Model.columnNames[9]] = "7.3"
+        new_record[model.Model.columnNames[10]] = "23456"
+        new_record[model.Model.columnNames[11]] = ""
+        new_record[model.Model.columnNames[12]] = ""
+        new_record[model.Model.columnNames[13]] = ""
+        new_record[model.Model.columnNames[14]] = "0"
 
         c.insert_record(new_record)
         c.cview.show_dataset()

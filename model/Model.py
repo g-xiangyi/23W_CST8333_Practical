@@ -11,6 +11,8 @@
 
 # Importing csv
 import csv
+# Importing dataclasses
+from dataclasses import dataclass
 
 ################################
 # Creating a record object
@@ -23,8 +25,24 @@ potatoesList = list()
 
 
 ################################
-# Creating Model class
-class Model:
+# Creating ModelDTO class - this is a data transfer object that will be used to transfer information to and from the dataset
+@dataclass
+class ModelDto:
+    ref_date: int
+    geo: str
+    dguid: str
+    apv: str
+    uom: str
+    uom_id: int
+    scalar_id: int
+    vector: str
+    coord: str
+    value: str
+    decimals: int
+    status: str = ""
+    sym: str = ""
+    terminated: str = ""
+
     def __init__(self):
         self._item_type = 'potatoes production'
 

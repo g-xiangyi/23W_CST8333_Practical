@@ -11,7 +11,7 @@
 #
 
 # Importing dto
-from model.ModelDto import potatoesList, print_student_name
+from model.Model import potatoesList, print_student_name
 
 
 # Creating View class

@@ -15,15 +15,15 @@
 # implement switch case for selecting which operation to do
 
 # Importing classes
-from model.ModelDto import recordObject, columnNames, potatoesList, Model, print_student_name
+from model.Model import recordObject, columnNames, potatoesList, ModelDto, print_student_name
 from view.View import View
 
 
 # Creating Controller class
 class Controller:
 
-    def __init__(self, cmodel: Model(), cview: View()):
-        self.cmodel: Model() = cmodel
+    def __init__(self, cmodel: ModelDto(), cview: View()):
+        self.cmodel: ModelDto() = cmodel
         self.cview: View() = cview
 
     # Load partial dataset
@@ -82,12 +82,19 @@ class Controller:
     def method_selector(self):
         print('This program demonstrates basic CRUD operations on the 32100358.csv file.')
         print('Please ensure file 32100358.csv is filed under the main module to ensure program functionality')
+        print('This program offers the following functionalities: ')
+        print('Press 1 to reload data from the dataset')
+        print('Press 2 to write to a new .csv file')
+        print('Press 3 to select records to view')
+        print('Press 4 to create and store a new record')
+        print('Press 5 to edit an existing record')
+        print('Press 6 delete an existing record')
         print_student_name()
-        no = input('Please input a number from 1-8 (e.g. \'2\'): ')
+        no = input('Please input a number from 1-6 (e.g. \'2\'): ')
 
         if no == '1':
             print('test successful')
         else:
-            print('test unsuccessful')
+            print('Please input a number from 1 to 6')
 
 

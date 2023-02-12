@@ -38,11 +38,11 @@ class RecordObject:
 
 # ColumnNames holds the names of each attribute
 columnNames = (
-    'ref_date', 'geo', 'dguid', 'apv', 'uom', 'uom_id', 'scalar_id', 'vtor', 'coord', 'value', 'status', 'sym',
-    'terminated',
-    'decimals')
+   'ref_date', 'geo', 'dguid', 'apv', 'uom', 'uom_id', 'scalar_id', 'vtor', 'coord', 'value', 'status', 'sym',
+   'terminated',
+   'decimals')
 
-columnNames = list()
+#columnNames = list()
 # RecordObject = dict('RecordObject', columnNames)
 
 # Creating a list to be used to store the dataset; stores the actual values. Each item in the list is a recordObject

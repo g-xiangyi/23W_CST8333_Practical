@@ -93,8 +93,7 @@ class Controller:
     # Method Selector allows user to select which operation to enact based on user input
     def method_selector(self):
         ds_name = "32100358.csv"
-        ds_size = 10
-
+        ds_size = len(potatoesList)
         while True:
             print('This program demonstrates basic CRUD operations on the 32100358.csv file.')
             print('This program offers the following functionalities: ')
@@ -108,39 +107,134 @@ class Controller:
             no = input('Please input a number from 1-6 (e.g. \'2\'): ')
 
             if no == '1':
-                print('####### Loading dataset')
-                if no.upper() == "Y":
-                    break
+                print('####### Test: reload data from the dataset')
+                ds_size = int(input('How many data records to reload '))
+                self.reload_partial_ds(ds_name, ds_size)
+                self.show_dataset()
+
                 self.exit_selection(no)
 
             elif no == '2':
-                print('####### Loading dataset')
-                if no.upper() == "Y":
-                    break
+                print('####### Test: write to a new .csv file')
+                new_ds_name = input('Enter name of new dataset (e.g. abc.csv): ')
+                self.persist_memory_ds(new_ds_name)
+
                 self.exit_selection(no)
 
             elif no == '3':
-                print('####### Loading dataset')
-                if no.upper() == "Y":
-                    break
+                print('####### Test: select records to view')
+                while True:
+                    start_record = int(input('Enter the start record number of the records block: '))
+                    end_record = int(input('Enter the end record number of the records block: '))
+                    if 0 < start_record <= end_record <= ds_size:
+                        self.show_range_ds(start_record, end_record)
+                        print_student_name()
+
+                        print('test successful')
+                        break
+                    else:
+                        print('Invalid start and/or end record numbers! Try again!')
+
                 self.exit_selection(no)
 
             elif no == '4':
-                print('####### Loading dataset')
-                if no.upper() == "Y":
+                print("####### Test: Create a new record")
+                print('The following is an example:')
+                self.show_range_ds(1, 1)
+                print(columnNames)
+                new_record = RecordObject()
+                while True:
+                    in_value = input(
+                        'Enter the value to {} (e.g. 2022): '.format(columnNames[0]))
+                    new_record[columnNames[0]] = in_value
                     break
+
+                while True:
+                    in_value = input(
+                        'Enter the value to {} (e.g. Ontario): '.format(columnNames[1]))
+                    new_record[columnNames[1]] = in_value
+                    break
+
+                while True:
+                    in_value = input(
+                        'Enter the value to {} (e.g. 2022A000235): '.format(columnNames[2]))
+                    new_record[model.Model.columnNames[2]] = in_value
+                    break
+
+                while True:
+                    in_value = input(
+                        'Enter the value to {} (e.g. Production, potatoes): '.format(model.Model.columnNames[3]))
+                    new_record[model.Model.columnNames[3]] = in_value
+                    break
+
+                while True:
+                    in_value = input(
+                        'Enter the value to {} (e.g. Hundredweight): '.format(model.Model.columnNames[4]))
+                    new_record[model.Model.columnNames[4]] = in_value
+                    break
+
+                while True:
+                    in_value = input(
+                        'Enter the value to {} (e.g. 156): '.format(model.Model.columnNames[5]))
+                    new_record[model.Model.columnNames[5]] = in_value
+                    break
+
+                while True:
+                    in_value = input(
+                        'Enter the value to {} (e.g. thousands): '.format(model.Model.columnNames[6]))
+                    new_record[model.Model.columnNames[6]] = in_value
+                    break
+
+                while True:
+                    in_value = input(
+                        'Enter the value to {} (e.g. 3): '.format(model.Model.columnNames[7]))
+                    new_record[model.Model.columnNames[7]] = in_value
+                    break
+
+                new_record[model.Model.columnNames[8]] = "v47167"
+                new_record[model.Model.columnNames[9]] = "7.3"
+                new_record[model.Model.columnNames[10]] = "23456"
+                new_record[model.Model.columnNames[11]] = ""
+                new_record[model.Model.columnNames[12]] = ""
+                new_record[model.Model.columnNames[13]] = ""
+                new_record[model.Model.columnNames[14]] = "0"
+
+                self.insert_record(new_record)
+                self.cview.show_dataset()
+
                 self.exit_selection(no)
 
             elif no == '5':
-                print('####### Loading dataset')
-                if no.upper() == "Y":
-                    break
+                print('####### Test: edit an existing record')
+                while True:
+                    n_record = input('Enter record number to be edited(1:{}): '.format(len(potatoesList)))
+                    ix_record_edited = int(n_record)
+                    if 0 < ix_record_edited <= ds_size:
+                        self.update_record(ix_record_edited)
+                        self.cview.show_dataset()
+
+                        print('test successful')
+                        break
+                    else:
+                        print('Invalid record number! Try again!')
+
                 self.exit_selection(no)
 
             elif no == '6':
-                print('####### Loading dataset')
-                if no.upper() == "Y":
-                    break
+                print('####### Test: delete an existing record')
+                while True:
+                    n_record = input('Enter record number to be deleted(1:{}): '.format(len(potatoesList)))
+                    ix_record_edited = int(n_record)
+                    if 0 < ix_record_edited <= ds_size:
+                        self.delete_record(ix_record_edited)
+                        self.cview.show_dataset()
+                        ds_size = len(potatoesList)
+
+                        print('test successful')
+                        break
+                    else:
+                        print('Invalid record number. Please try again!')
+
                 self.exit_selection(no)
 
             else:

@@ -69,7 +69,7 @@ class View:
     # Save dataset
     @staticmethod
     def view_save_ds(file_name):
-        print('Saving dataset []'.format(file_name))
+        print('Saving dataset {}'.format(file_name))
         print_student_name()
 
     # Insert record
@@ -82,7 +82,7 @@ class View:
     # Edit record
     @staticmethod
     def view_edit_record(record_index):
-        print('The []th record has been edited and is shown below:'.format(record_index))
+        print('The {}th record has been edited and is shown below:'.format(record_index))
         print(potatoesList[record_index - 1])
         print_student_name()
 

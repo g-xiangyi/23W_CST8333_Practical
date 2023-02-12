@@ -10,17 +10,21 @@
 # ################################
 #
 
+####################################################################################################################
+# TO DOS:
+# implement switch case for selecting which operation to do
+
 # Importing classes
-from model.ModelDto import recordObject, columnNames, potatoesList, Model
+from model.ModelDto import recordObject, columnNames, potatoesList, Model, print_student_name
 from view.View import View
 
 
 # Creating Controller class
 class Controller:
 
-    def __init__(self, cmodel, cview):
-        self.cmodel = Model()
-        self.cview = View()
+    def __init__(self, cmodel: Model(), cview: View()):
+        self.cmodel: Model() = cmodel
+        self.cview: View() = cview
 
     # Load partial dataset
     def load_partial_ds(self, file_name, file_size):
@@ -73,3 +77,17 @@ class Controller:
     def delete_record(self, ix_delete_record):
         record = self.cmodel.delete_record(ix_delete_record)
         self.cview.view_delete_record(ix_delete_record, record)
+
+    # Method Selector allows user to select which operation to enact based on user input
+    def method_selector(self):
+        print('This program demonstrates basic CRUD operations on the 32100358.csv file.')
+        print('Please ensure file 32100358.csv is filed under the main module to ensure program functionality')
+        print_student_name()
+        no = input('Please input a number from 1-8 (e.g. \'2\'): ')
+
+        if no == '1':
+            print('test successful')
+        else:
+            print('test unsuccessful')
+
+

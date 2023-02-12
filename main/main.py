@@ -26,6 +26,8 @@ def main():
 
     c = Controller(mmodel, mview)
 
+    c.method_selector()
+
     test_load_partial_ds = True
     if test_load_partial_ds:
         print('####### Test: Load partial dataset')

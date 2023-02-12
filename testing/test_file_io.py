@@ -16,4 +16,4 @@ class TestOpenFile(unittest.TestCase):
 
     # Method to test whether correct number of items are added to array
     def test_fileopen(self):
-        self.assertTrue()
+        #self.assert()

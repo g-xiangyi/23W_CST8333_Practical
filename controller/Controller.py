@@ -9,7 +9,7 @@
 # # Controller class contains code for Controller portion of MVC
 # ################################
 #
-
+import view.View
 ####################################################################################################################
 # TO DOS:
 # implement switch case for selecting which operation to do
@@ -79,21 +79,69 @@ class Controller:
         record = self.cmodel.delete_record(ix_delete_record)
         self.cview.view_delete_record(ix_delete_record, record)
 
+    def exit_selection(self, exit_type):
+        while True:
+            exit_type = input('Select another functionality (y/n)?')
+            if exit_type.upper() == "Y":
+                return
+            elif exit_type.upper() == "N":
+                print_student_name()
+                exit(0)
+            else:
+                print("Invalid input! Please try again: type y or n")
+
     # Method Selector allows user to select which operation to enact based on user input
     def method_selector(self):
-        print('This program demonstrates basic CRUD operations on the 32100358.csv file.')
-        print('This program offers the following functionalities: ')
-        print('Press 1 to reload data from the dataset')
-        print('Press 2 to write to a new .csv file')
-        print('Press 3 to select records to view')
-        print('Press 4 to create and store a new record')
-        print('Press 5 to edit an existing record')
-        print('Press 6 delete an existing record')
-        print_student_name()
-        no = input('Please input a number from 1-6 (e.g. \'2\'): ')
+        ds_name = "32100358.csv"
+        ds_size = 10
 
-        if no == '1':
-            print('test successful')
+        while True:
+            print('This program demonstrates basic CRUD operations on the 32100358.csv file.')
+            print('This program offers the following functionalities: ')
+            print('Press 1 to reload data from the dataset')
+            print('Press 2 to write to a new .csv file')
+            print('Press 3 to select records to view')
+            print('Press 4 to create and store a new record')
+            print('Press 5 to edit an existing record')
+            print('Press 6 delete an existing record')
+            print_student_name()
+            no = input('Please input a number from 1-6 (e.g. \'2\'): ')
 
-        else:
-            print('Please input a number from 1 to 6')
+            if no == '1':
+                print('####### Loading dataset')
+                if no.upper() == "Y":
+                    break
+                self.exit_selection(no)
+
+            elif no == '2':
+                print('####### Loading dataset')
+                if no.upper() == "Y":
+                    break
+                self.exit_selection(no)
+
+            elif no == '3':
+                print('####### Loading dataset')
+                if no.upper() == "Y":
+                    break
+                self.exit_selection(no)
+
+            elif no == '4':
+                print('####### Loading dataset')
+                if no.upper() == "Y":
+                    break
+                self.exit_selection(no)
+
+            elif no == '5':
+                print('####### Loading dataset')
+                if no.upper() == "Y":
+                    break
+                self.exit_selection(no)
+
+            elif no == '6':
+                print('####### Loading dataset')
+                if no.upper() == "Y":
+                    break
+                self.exit_selection(no)
+
+            else:
+                print('Invalid input! Please type a number from 1 to 6')

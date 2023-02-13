@@ -9,7 +9,7 @@
 # Main driver method
 # ################################
 
-import persistence.DataStore
+from persistence.DataStore import ds_size, ds_name, DataStore
 import model.Model
 from model.Model import potatoesList, Model, print_student_name
 from view.View import View
@@ -24,13 +24,16 @@ def main():
 
     mmodel = Model()
     mview = View()
+    mstore = DataStore()
+#    mstore.create_dataset_partial(ds_name, ds_size)
 
-    c = Controller(mmodel, mview)
+    c = Controller(mmodel, mview, mstore)
+
 
 # THIS MUST BE LOADED BEFORE ANYTHING ELSE IN ORDER TO LOAD THE DATASET
     test_load_partial_ds = True
     if test_load_partial_ds:
-        print('####### Test: Load partial dataset')
+        print('####### Test: Load initial dataset')
         c.load_100_records(ds_name, ds_size)
         c.show_dataset()
         print('success')

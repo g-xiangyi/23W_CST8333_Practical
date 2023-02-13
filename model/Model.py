@@ -26,6 +26,7 @@ class RecordObject:
     apv: str
     uom: str
     uom_id: int
+    scalar_f: str
     scalar_id: int
     vtor: str
     coord: str
@@ -35,15 +36,32 @@ class RecordObject:
     terminated: str
     decimals: int
 
+    def __init__(self):
+        ref_date: int = 1900
+        geo: str = 'Canada'
+        dguid: str = "2016A000011124"
+        apv: str = 'Seeded area, potatoes'
+        uom: str = 'Acres'
+        uom_id: int = 28
+        scalar_f: str = 'units'
+        scalar_id: int = 0
+        vtor: str = 'v47140'
+        coord: str = '1.1'
+        value: str = '503600'
+        status: str = ''
+        sym: str = ''
+        terminated: str = ''
+        decimals: int = 0
+
 
 # ColumnNames holds the names of each attribute
 columnNames = (
-   'ref_date', 'geo', 'dguid', 'apv', 'uom', 'uom_id', 'scalar_id', 'vtor', 'coord', 'value', 'status', 'sym',
-   'terminated',
-   'decimals')
+    'ref_date', 'geo', 'dguid', 'apv', 'uom', 'uom_id', 'scalar_id', 'vtor', 'coord', 'value', 'status', 'sym',
+    'terminated',
+    'decimals')
 
-#columnNames = list()
-# RecordObject = dict('RecordObject', columnNames)
+# columnNames = list()
+#RecordObject = dict('RecordObject', columnNames)
 
 # Creating a list to be used to store the dataset; stores the actual values. Each item in the list is a recordObject
 # Save the 100 RecordObject objects into this list!
@@ -64,86 +82,6 @@ class Model:
     @item_type.setter
     def item_type(self, new_item_type):
         self._item_type = new_item_type
-
-    # Method to create partial dataset (10 records)
-    @staticmethod
-    def create_dataset_partial(dataset_name, dataset_size):
-        try:
-        #     # Iterate 100 times to save the first 100 records from 32100358.csv into 100 separate RecordObject() objects!
-        #     with open(dataset_name, mode='r') as csvfile:
-        #         filereader = csv.reader(csvfile)
-        #         for row in enumerate(filereader):
-        #             record_i = RecordObject(
-        #                 ref_date=int(row[0]),
-        #                 geo=row[1],
-        #                 dguid=row[2],
-        #                 apv=row[3],
-        #                 uom=row[4],
-        #                 uom_id=int(row[5]),
-        #                 scalar_id=int(row[6]),
-        #                 vtor=row[7],
-        #                 coord=row[8],
-        #                 value=row[9],
-        #                 status=row[10],
-        #                 sym=row[11],
-        #                 terminated=row[12],
-        #                 decimals=int(row[13])
-        #             )
-        #             potatoesList.append(record_i)
-        #             if row == 99:
-        #                 pass
-
-            with open(dataset_name, mode='r') as csv_file:
-                csv_reader = csv.DictReader(csv_file)
-
-                # Get columnn names
-                global columnNames
-                columnNames = csv_reader.fieldnames
-
-                line_count = 0
-# Look at this for enumerate() to use as a counter
-#         https: // realpython.com / python - enumerate /
-                for row in csv_reader:
-                    if line_count == 0:
-                        line_count += 1
-                    elif line_count > dataset_size:
-                        break
-
-                    global RecordObject
-                    RecordObject = row
-                    potatoesList.append(RecordObject)
-                    line_count += 1
-
-        except Exception as e:
-            print('The dataset cannot be opened')
-            print(e)
-            exit(1)
-
-    # Method to create full dataset
-    @staticmethod
-    def create_dataset(dataset_name):
-        try:
-            with open(dataset_name, mode='r') as csv_file:
-                csv_reader = csv.DictReader(csv_file)
-
-            # Get column names
-            # global columnNames
-            # columnNames = csv_reader.fieldnames
-            line_count = 0
-
-            for row in csv_reader:
-                if line_count == 0:
-                    line_count += 1
-
-                    global RecordObject
-                    RecordObject = row
-                    potatoesList.append(RecordObject)
-                    line_count += 1
-                print(line_count)
-        except Exception as e:
-            print('The dataset cannot be opened')
-            print(e)
-            exit(1)
 
     # Method to save dataset
     @staticmethod

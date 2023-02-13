@@ -16,19 +16,21 @@ import view.View
 
 # Importing classes
 from model.Model import RecordObject, columnNames, potatoesList, Model, print_student_name
+from persistence.DataStore import DataStore
 from view.View import View
 
 
 # Creating Controller class
 class Controller:
 
-    def __init__(self, cmodel: Model(), cview: View()):
+    def __init__(self, cmodel: Model(), cview: View(), cpers: DataStore()):
         self.cmodel: Model() = cmodel
         self.cview: View() = cview
+        self.cpers: DataStore() = cpers
 
     # Load partial dataset
     def load_100_records(self, file_name, file_size):
-        self.cmodel.create_dataset_partial(file_name, file_size)
+        self.cpers.create_dataset_partial(file_name, file_size)
         self.cview.view_load_partial_ds(file_name, file_size)
 
     # Load full dataset
@@ -39,8 +41,7 @@ class Controller:
     # Reload partial dataset
     def reload_partial_ds(self, file_name, file_size):
         potatoesList.clear()
-
-        self.cmodel.create_dataset_partial(file_name, file_size)
+        self.cpers.create_dataset_partial(file_name, file_size)
 
     # Reload full dataset
     def reload_full_ds(self, file_name):

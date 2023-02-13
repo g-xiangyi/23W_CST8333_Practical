@@ -18,7 +18,7 @@ from controller.Controller import Controller
 # Driver method runs entire program
 def main():
     # open dataset
-    ds_name = "32100358.csv"
+    ds_name = "32100358_1.csv"
     ds_size = 10
 
     mmodel = ModelDto()

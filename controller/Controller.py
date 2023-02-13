@@ -80,7 +80,7 @@ class Controller:
 
     # Method Selector allows user to select which operation to enact based on user input
     def method_selector(self):
-        ds_name = "32100358.csv"
+        ds_name = "32100358_1.csv"
         ds_size = len(potatoesList)
         while True:
             print('This program demonstrates basic CRUD operations on the 32100358.csv file.')

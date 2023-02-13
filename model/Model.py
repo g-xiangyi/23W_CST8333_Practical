@@ -46,7 +46,7 @@ class RecordObject:
     terminated: str
     decimals: int
 
-# Constructor dunder method assigns 15 default values for RecordObject class, 1 for each record attribute
+    # Constructor dunder method assigns 15 default values for RecordObject class, 1 for each record attribute
     def __init__(self):
         ref_date: int = 1900
         geo: str = 'Canada'
@@ -66,7 +66,7 @@ class RecordObject:
 
 
 ################################
-# Creating Model class
+# Creating Model class by Amy Guo
 class Model:
 
     # Method creates and saves a new file with the same column headers as the dataset
@@ -97,13 +97,152 @@ class Model:
         print(edit_record)
         while True:
             key = input('Type name of column to edit:')
-            print(key + ' : ' + potatoesList[record_index - 1][key])
-            v = input('Enter new value for column: ')
-            potatoesList[record_index - 1][key] = v
+            if key == 'ref_date':
+                v = int(input('Enter new value for column: '))
+                edit_record.ref_date = v
 
-            s = input('Do you want to edit another column (y/n)?')
-            if s == 'n':
-                break
+                s = input('Do you want to edit another column (y/n)?')
+                if s.upper() == 'N':
+                    potatoesList[record_index - 1] = edit_record
+                    break
+
+            elif key == 'geo':
+                v = int(input('Enter new value for column: '))
+                edit_record.geo = v
+
+                s = input('Do you want to edit another column (y/n)?')
+                if s.upper() == 'N':
+                    potatoesList[record_index - 1] = edit_record
+                    break
+
+            elif key == 'dguid':
+                v = int(input('Enter new value for column: '))
+                edit_record.ref_date = v
+
+                s = input('Do you want to edit another column (y/n)?')
+                if s.upper() == 'N':
+                    potatoesList[record_index - 1] = edit_record
+                    break
+
+            elif key == 'apv':
+                v = int(input('Enter new value for column: '))
+                edit_record.ref_date = v
+
+                s = input('Do you want to edit another column (y/n)?')
+                if s.upper() == 'N':
+                    potatoesList[record_index - 1] = edit_record
+                    break
+
+            elif key == 'apv':
+                v = int(input('Enter new value for column: '))
+                edit_record.ref_date = v
+
+                s = input('Do you want to edit another column (y/n)?')
+                if s.upper() == 'N':
+                    potatoesList[record_index - 1] = edit_record
+                    break
+
+            elif key == 'uom':
+                v = int(input('Enter new value for column: '))
+                edit_record.uom = v
+
+                s = input('Do you want to edit another column (y/n)?')
+                if s.upper() == 'N':
+                    potatoesList[record_index - 1] = edit_record
+                    break
+
+            elif key == 'uom_id':
+                v = int(input('Enter new value for column: '))
+                edit_record.uom_id = v
+
+                s = input('Do you want to edit another column (y/n)?')
+                if s.upper() == 'N':
+                    potatoesList[record_index - 1] = edit_record
+                    break
+
+            elif key == 'scalar_f':
+                v = int(input('Enter new value for column: '))
+                edit_record.scalar_f = v
+
+                s = input('Do you want to edit another column (y/n)?')
+                if s.upper() == 'N':
+                    potatoesList[record_index - 1] = edit_record
+                    break
+
+            elif key == 'scalar_id':
+                v = int(input('Enter new value for column: '))
+                edit_record.ref_date = v
+
+                s = input('Do you want to edit another column (y/n)?')
+                if s.upper() == 'N':
+                    potatoesList[record_index - 1] = edit_record
+                    break
+
+            elif key == 'vtor':
+                v = int(input('Enter new value for column: '))
+                edit_record.vtor = v
+
+                s = input('Do you want to edit another column (y/n)?')
+                if s.upper() == 'N':
+                    potatoesList[record_index - 1] = edit_record
+                    break
+
+            elif key == 'coord':
+                v = int(input('Enter new value for column: '))
+                edit_record.coord = v
+
+                s = input('Do you want to edit another column (y/n)?')
+                if s.upper() == 'N':
+                    potatoesList[record_index - 1] = edit_record
+                    break
+
+            elif key == 'value':
+                v = int(input('Enter new value for column: '))
+                edit_record.value = v
+
+                s = input('Do you want to edit another column (y/n)?')
+                if s.upper() == 'N':
+                    potatoesList[record_index - 1] = edit_record
+                    break
+
+            elif key == 'status':
+                v = int(input('Enter new value for column: '))
+                edit_record.status = v
+
+                s = input('Do you want to edit another column (y/n)?')
+                if s.upper() == 'N':
+                    potatoesList[record_index - 1] = edit_record
+                    break
+
+            elif key == 'sym':
+                v = int(input('Enter new value for column: '))
+                edit_record.sym = v
+
+                s = input('Do you want to edit another column (y/n)?')
+                if s.upper() == 'N':
+                    potatoesList[record_index - 1] = edit_record
+                    break
+
+            elif key == 'terminated':
+                v = int(input('Enter new value for column: '))
+                edit_record.terminated = v
+
+                s = input('Do you want to edit another column (y/n)?')
+                if s.upper() == 'N':
+                    potatoesList[record_index - 1] = edit_record
+                    break
+
+            elif key == 'decimals':
+                v = int(input('Enter new value for column: '))
+                edit_record.decimals = v
+
+                s = input('Do you want to edit another column (y/n)?')
+                if s.upper() == 'N':
+                    potatoesList[record_index - 1] = edit_record
+                    break
+
+            else:
+                print('Invalid column name. Please try again!')
 
     # Method to delete record
     @staticmethod

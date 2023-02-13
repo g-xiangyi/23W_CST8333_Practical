@@ -91,7 +91,7 @@ class Controller:
                 print("Invalid input! Please try again: type y or n")
 
     # Method Selector presents user with a selection menu of possible operations. User input controls which CRUD operation
-    # is performed.
+    # is performed. By Amy Guo
     def method_selector(self):
         ds_name = "32100358.csv"
         ds_size = len(potatoesList)

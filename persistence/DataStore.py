@@ -17,7 +17,7 @@ ds_name = "32100358.csv"
 ds_size = 100
 
 
-# Creating a class to store data accessed from the dataset
+# Creating a class to store data accessed from the dataset by Amy Guo
 class DataStore:
     # Method to create partial dataset (10 records)
     @staticmethod
@@ -26,12 +26,12 @@ class DataStore:
             with open(dataset_name, mode='r') as csv_file:
                 csv_reader = csv.DictReader(csv_file)
 
-                # Get columnn names
+                # Get columnn names by reading the first line of the csv file
                 loc_columnNames = csv_reader.fieldnames
                 line_count = 0
 
                 for row in csv_reader:  # iterate 100 times for 100 rows
-                    if line_count == 0:
+                    if line_count == 0: # Program by Amy Guo
                         line_count += 1
                     elif line_count > dataset_size:
                         break
@@ -58,7 +58,7 @@ class DataStore:
 
                     if line_count > dataset_size:
                         break
-
+        # Exception handling if file input fails
         except Exception as e:
             print('The dataset cannot be opened')
             print(e)

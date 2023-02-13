@@ -62,7 +62,7 @@ class Controller:
 
     # Persist to memory
     def persist_memory_ds(self, new_ds_name):
-        self.cmodel.save_dataset(new_ds_name)
+        self.cpers.save_dataset(new_ds_name)
         self.cview.view_save_ds(new_ds_name)
 
     # Insert record

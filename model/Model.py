@@ -91,8 +91,8 @@ class Model:
                 fieldnames = columnNames
                 writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
                 writer.writeheader()
-                for row in potatoesList:
-                    writer.writerow(row)
+                # for row in potatoesList:
+                #     writer.writerow(row)
                 csv_file.close()
         except Exception as e:
             print('The new dataset {} cannot be created'.format(dataset_name))
@@ -108,16 +108,42 @@ class Model:
     @staticmethod
     def update_record(record_index):
         print('The {}th record has been selected, and is shown below:'.format(record_index))
-        print(potatoesList[record_index - 1])
+        new_record = potatoesList[record_index - 1]
+        print(new_record)
         while True:
-            key = input('Type name of column to edit:')
-            print(key + ' : ' + potatoesList[record_index - 1][key])
-            v = input('Enter new value for column: ')
-            potatoesList[record_index - 1][key] = v
+            key = input('Type name of column to edit: ')
+            if key == 'ref_date':
+                print('ref_date = {}'.format(new_record.ref_date))
+                v = int(input('Enter new value for column: '))
+                new_record.ref_date = v
 
-            s = input('Do you want to edit another column (y/n)?')
-            if s == 'n':
-                break
+                s = input('Do you want to edit another column (y/n)?')
+                if s == 'n':
+                    break
+
+            elif key == 'geo':
+                print('geo = {}'.format(new_record.geo))
+                v = input('Enter new value for column: ')
+                new_record.geo = v
+
+                s = input('Do you want to edit another column (y/n)?')
+                if s == 'n':
+                    potatoesList[record_index - 1] = new_record
+                    break
+
+            elif key == 'dguid':
+                print('dguid = {}'.format(new_record.dguid))
+                v = input('Enter new value for column: ')
+                new_record.dguid = v
+
+                s = input('Do you want to edit another column (y/n)?')
+                if s == 'n':
+                    potatoesList[record_index - 1] = new_record
+                    break
+
+            else:
+                print('Invalid column name. Please try again!')
+
 
     # Method to delete record
     @staticmethod

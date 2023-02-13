@@ -9,6 +9,7 @@
 # DataStore class stores data and handles file i-i
 # ################################
 
+import io
 import csv
 # Importing DTO
 from model.Model import RecordObject, potatoesList
@@ -61,3 +62,4 @@ class DataStore:
             print('The dataset cannot be opened')
             print(e)
             exit(1)
+

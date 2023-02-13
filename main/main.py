@@ -9,12 +9,11 @@
 # Main driver method
 # ################################
 
-from persistence.DataStore import ds_size, ds_name, DataStore
+from persistence.DataStore import DataStore
 import model.Model
-from model.Model import potatoesList, Model, print_student_name
+from model.Model import potatoesList, Model
 from view.View import View
 from controller.Controller import Controller
-import unittest
 
 # Driver method runs entire program
 def main():
@@ -25,47 +24,9 @@ def main():
     mmodel = Model()
     mview = View()
     mstore = DataStore()
-#    mstore.create_dataset_partial(ds_name, ds_size)
 
     c = Controller(mmodel, mview, mstore)
-
-
-# THIS MUST BE LOADED BEFORE ANYTHING ELSE IN ORDER TO LOAD THE DATASET
-    test_load_partial_ds = True
-    if test_load_partial_ds:
-        print('####### Test: Load initial dataset')
-        c.load_100_records(ds_name, ds_size)
-        c.show_dataset()
-        print('success')
- #       print('The dataset size is {}'.format(len(model.Model.potatoesList)))
- #       print(model.Model.columnNames)
-
     c.method_selector()
-
-    test_persist_ds = False
-    if test_persist_ds:
-        print('####### Test: Save dataset')
-        new_ds_name = input('Enter name of new dataset (e.g. abc.csv): ')
-        c.persist_memory_ds(new_ds_name)
-
-    test_reload_ds = False
-    if test_reload_ds:
-        print('####### Test: Reload dataset')
-        ds_size = 12
-        c.reload_partial_ds(ds_name, ds_size)
-        c.show_dataset()
-
-    test_select_single_ds = False
-    if test_select_single_ds:
-        print('####### Test: Select and show the 3rd record object')
-        c.show_single_ds(3)
-        print_student_name()
-
-    test_select_show_multiple_ds = False
-    if test_select_show_multiple_ds:
-        print('####### Test: Select and show the 4th to 6th record objects')
-        c.show_range_ds(4, 6)
-        print_student_name()
 
     test_create_new_record = True
     if test_create_new_record:

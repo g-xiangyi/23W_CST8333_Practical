@@ -8,21 +8,17 @@
 # ################################
 # # Controller class contains code for Controller portion of MVC
 # ################################
-#
-import view.View
-####################################################################################################################
-# TO DOS:
-# implement switch case for selecting which operation to do
 
-# Importing classes
+# Imports
 from model.Model import RecordObject, columnNames, potatoesList, Model, print_student_name
 from persistence.DataStore import DataStore
 from view.View import View
 
 
-# Creating Controller class
+# Creating Controller class, which interacts with Model, View, and the DataStore.
 class Controller:
 
+    # Constructor dunder method takes in a Model, View, and DataStore object in order to ensure they can be interacted with.
     def __init__(self, cmodel: Model(), cview: View(), cpers: DataStore()):
         self.cmodel: Model() = cmodel
         self.cview: View() = cview
@@ -80,7 +76,10 @@ class Controller:
         record = self.cmodel.delete_record(ix_delete_record)
         self.cview.view_delete_record(ix_delete_record, record)
 
-    def exit_selection(self, exit_type):
+    # exit_selection is made to be used within the method method_selector. This method allows the user to select another
+    # function from the menu of operations or to exit the program.
+    @staticmethod
+    def exit_selection():
         while True:
             exit_type = input('Select another functionality (y/n)?')
             if exit_type.upper() == "Y":
@@ -91,7 +90,8 @@ class Controller:
             else:
                 print("Invalid input! Please try again: type y or n")
 
-    # Method Selector allows user to select which operation to enact based on user input
+    # Method Selector presents user with a selection menu of possible operations. User input controls which CRUD operation
+    # is performed.
     def method_selector(self):
         ds_name = "32100358.csv"
         ds_size = len(potatoesList)
@@ -108,38 +108,34 @@ class Controller:
             no = input('Please input a number from 1-6 (e.g. \'2\'): ')
 
             if no == '1':
-                print('####### Test: reload data from the dataset')
-                ds_size = int(input('How many data records to reload '))
+                print('####### Selection 1: Load data from dataset csv file to disk')
+                ds_size = int(input('How many data records to reload? '))
                 self.reload_partial_ds(ds_name, ds_size)
                 self.show_dataset()
-
-                self.exit_selection(no)
+                self.exit_selection()
 
             elif no == '2':
-                print('####### Test: write to a new .csv file')
+                print('####### Selection 2: Write to a new .csv file')
                 new_ds_name = input('Enter name of new dataset (e.g. abc.csv): ')
                 self.persist_memory_ds(new_ds_name)
-
-                self.exit_selection(no)
+                self.exit_selection()
 
             elif no == '3':
-                print('####### Test: select records to view')
+                print('####### Selection 3: Select records to view')
                 while True:
                     start_record = int(input('Enter the start record number of the records block: '))
                     end_record = int(input('Enter the end record number of the records block: '))
                     if 0 < start_record <= end_record <= ds_size:
                         self.show_range_ds(start_record, end_record)
                         print_student_name()
-
                         print('test successful')
                         break
                     else:
                         print('Invalid start and/or end record numbers! Try again!')
-
-                self.exit_selection(no)
+                self.exit_selection()
 
             elif no == '4':
-                print("####### Test: Create a new record")
+                print("####### Selection 4: Create a new record")
                 print('The following is an example:')
                 self.show_range_ds(1, 1)
                 print(columnNames)
@@ -159,51 +155,50 @@ class Controller:
                 while True:
                     in_value = input(
                         'Enter the value to {} (e.g. 2022A000235): '.format(columnNames[2]))
-                    new_record[model.Model.columnNames[2]] = in_value
+                    new_record[columnNames[2]] = in_value
                     break
 
                 while True:
                     in_value = input(
-                        'Enter the value to {} (e.g. Production, potatoes): '.format(model.Model.columnNames[3]))
-                    new_record[model.Model.columnNames[3]] = in_value
+                        'Enter the value to {} (e.g. Production, potatoes): '.format(columnNames[3]))
+                    new_record[columnNames[3]] = in_value
                     break
 
                 while True:
                     in_value = input(
-                        'Enter the value to {} (e.g. Hundredweight): '.format(model.Model.columnNames[4]))
-                    new_record[model.Model.columnNames[4]] = in_value
+                        'Enter the value to {} (e.g. Hundredweight): '.format(columnNames[4]))
+                    new_record[columnNames[4]] = in_value
                     break
 
                 while True:
                     in_value = input(
-                        'Enter the value to {} (e.g. 156): '.format(model.Model.columnNames[5]))
-                    new_record[model.Model.columnNames[5]] = in_value
+                        'Enter the value to {} (e.g. 156): '.format(columnNames[5]))
+                    new_record[columnNames[5]] = in_value
                     break
 
                 while True:
                     in_value = input(
-                        'Enter the value to {} (e.g. thousands): '.format(model.Model.columnNames[6]))
-                    new_record[model.Model.columnNames[6]] = in_value
+                        'Enter the value to {} (e.g. thousands): '.format(columnNames[6]))
+                    new_record[columnNames[6]] = in_value
                     break
 
                 while True:
                     in_value = input(
-                        'Enter the value to {} (e.g. 3): '.format(model.Model.columnNames[7]))
-                    new_record[model.Model.columnNames[7]] = in_value
+                        'Enter the value to {} (e.g. 3): '.format(columnNames[7]))
+                    new_record[columnNames[7]] = in_value
                     break
 
-                new_record[model.Model.columnNames[8]] = "v47167"
-                new_record[model.Model.columnNames[9]] = "7.3"
-                new_record[model.Model.columnNames[10]] = "23456"
-                new_record[model.Model.columnNames[11]] = ""
-                new_record[model.Model.columnNames[12]] = ""
-                new_record[model.Model.columnNames[13]] = ""
-                new_record[model.Model.columnNames[14]] = "0"
+                new_record[columnNames[8]] = "v47167"
+                new_record[columnNames[9]] = "7.3"
+                new_record[columnNames[10]] = "23456"
+                new_record[columnNames[11]] = ""
+                new_record[columnNames[12]] = ""
+                new_record[columnNames[13]] = ""
+                new_record[columnNames[14]] = "0"
 
                 self.insert_record(new_record)
                 self.cview.show_dataset()
-
-                self.exit_selection(no)
+                self.exit_selection()
 
             elif no == '5':
                 print('####### Test: edit an existing record')
@@ -213,16 +208,14 @@ class Controller:
                     if 0 < ix_record_edited <= ds_size:
                         self.update_record(ix_record_edited)
                         self.cview.show_dataset()
-
-                        print('test successful')
+                        print('Record successfully edited')
                         break
                     else:
                         print('Invalid record number! Try again!')
-
-                self.exit_selection(no)
+                self.exit_selection()
 
             elif no == '6':
-                print('####### Test: delete an existing record')
+                print('####### Selection 6: Delete an existing record')
                 while True:
                     n_record = input('Enter record number to be deleted(1:{}): '.format(len(potatoesList)))
                     ix_record_edited = int(n_record)
@@ -230,13 +223,11 @@ class Controller:
                         self.delete_record(ix_record_edited)
                         self.cview.show_dataset()
                         ds_size = len(potatoesList)
-
-                        print('test successful')
+                        print('Successfully deleted!')
                         break
                     else:
                         print('Invalid record number. Please try again!')
-
-                self.exit_selection(no)
+                self.exit_selection()
 
             else:
                 print('Invalid input! Please type a number from 1 to 6')

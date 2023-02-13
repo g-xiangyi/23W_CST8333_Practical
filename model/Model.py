@@ -17,7 +17,8 @@ from dataclasses import dataclass
 
 
 ################################
-# Creating a record object/Data Transfer Object used for transferring data between layers of the application
+# Creating a Data Transfer Object dataclass object used for transferring data between layers of the application.
+# 15 attributes are assigned, 1 for each column header/record attribute with assigned data types.
 @dataclass
 class RecordObject:
     ref_date: int
@@ -36,6 +37,7 @@ class RecordObject:
     terminated: str
     decimals: int
 
+# Constructor dunder method assigns 15 default values for RecordObject class, 1 for each record attribute
     def __init__(self):
         ref_date: int = 1900
         geo: str = 'Canada'
@@ -54,17 +56,15 @@ class RecordObject:
         decimals: int = 0
 
 
-# ColumnNames holds the names of each attribute
+# ColumnNames holds the names of each column name in the dataset
 columnNames = (
     'ref_date', 'geo', 'dguid', 'apv', 'uom', 'uom_id', 'scalar_id', 'vtor', 'coord', 'value', 'status', 'sym',
     'terminated',
     'decimals')
 
-# columnNames = list()
-#RecordObject = dict('RecordObject', columnNames)
-
 # Creating a list to be used to store the dataset; stores the actual values. Each item in the list is a recordObject
-# Save the 100 RecordObject objects into this list!
+# The dataset that the program will be working with is saved in this list - 100 DTOs will be instantiated and then saved
+# into this list.
 potatoesList = list()
 
 
@@ -91,8 +91,8 @@ class Model:
                 fieldnames = columnNames
                 writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
                 writer.writeheader()
-                for row in potatoesList:
-                    writer.writerow(row)
+                # for row in potatoesList:
+                #     writer.writerow(row)
                 csv_file.close()
         except Exception as e:
             print('The new dataset {} cannot be created'.format(dataset_name))
@@ -127,6 +127,8 @@ class Model:
         return record
 
 
-# Method to print author name
+# Method to print author name. Made at the global-level so that it can be called when needed. This method could be
+# placed anywhere but I felt Model was most appropriate since it is presented as application data in the requirements.
+# Another place it could be placed is in View.
 def print_student_name():
     print('Program written by Amy Guo')

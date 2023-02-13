@@ -54,12 +54,6 @@ class View:
         print("Dataset is partially loaded from " + file_name + ' with {} recirds'.format(file_size))
         print_student_name()
 
-    # Reload partial dataset
-    @staticmethod
-    def view_reload_partial_ds(file_name, file_size):
-        print('Dataset is partially reloaded from ' + file_name + ' with {} records'.format(file_size))
-        print_student_name()
-
     # Load full dataset
     @staticmethod
     def view_load_ds(file_name):

@@ -6,16 +6,18 @@
 # ################################
 #
 # ################################
-# DataStore class stores data and handles file i-i
+# DataStore class stores data and handles file i-o
 # ################################
 
 import csv
-# Importing DTO
+# Importing DTO (RecordObject) and DTO storage list (potatoesList)
 from model.Model import RecordObject, potatoesList
 
 ds_name = "32100358.csv"
-ds_size = 10
+ds_size = 100
 
+
+# Creating a class to store data accessed from the dataset
 class DataStore:
     # Method to create partial dataset (10 records)
     @staticmethod
@@ -28,7 +30,7 @@ class DataStore:
                 loc_columnNames = csv_reader.fieldnames
                 line_count = 0
 
-                for row in csv_reader: #iterate 100 times for 100 rows
+                for row in csv_reader:  # iterate 100 times for 100 rows
                     if line_count == 0:
                         line_count += 1
                     elif line_count > dataset_size:

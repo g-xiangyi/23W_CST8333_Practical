@@ -14,7 +14,7 @@
 from model.Model import potatoesList, print_student_name
 
 
-# Creating View class
+# Creating View class - handles user interface presentation
 class View:
 
     # Method to display full dataset

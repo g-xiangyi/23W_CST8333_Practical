@@ -24,7 +24,7 @@ class Controller:
         self.cview: View() = cview
         self.cpers: DataStore() = cpers
 
-    # Load partial dataset
+    # Instantiate 100 records into RecordObjects and load into a list
     def load_100_records(self, file_name, file_size):
         self.cpers.create_dataset_partial(file_name, file_size)
         self.cview.view_load_partial_ds(file_name, file_size)
@@ -128,7 +128,6 @@ class Controller:
                     if 0 < start_record <= end_record <= ds_size:
                         self.show_range_ds(start_record, end_record)
                         print_student_name()
-                        print('test successful')
                         break
                     else:
                         print('Invalid start and/or end record numbers! Try again!')

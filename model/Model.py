@@ -11,9 +11,18 @@
 
 # Importing csv
 import csv
-from collections import namedtuple
-from typing import NamedTuple
 from dataclasses import dataclass
+
+# ColumnNames holds the names of each column name in the dataset in a list array
+columnNames = (
+    'ref_date', 'geo', 'dguid', 'apv', 'uom', 'uom_id', 'scalar_id', 'vtor', 'coord', 'value', 'status', 'sym',
+    'terminated',
+    'decimals')
+
+# Creating a list to be used to store the dataset; stores the actual values. Each item in the list is a recordObject
+# The dataset that the program will be working with is saved in this list - 100 DTOs will be instantiated and then saved
+# into this list.
+potatoesList = list()
 
 
 ################################
@@ -56,34 +65,12 @@ class RecordObject:
         decimals: int = 0
 
 
-# ColumnNames holds the names of each column name in the dataset
-columnNames = (
-    'ref_date', 'geo', 'dguid', 'apv', 'uom', 'uom_id', 'scalar_id', 'vtor', 'coord', 'value', 'status', 'sym',
-    'terminated',
-    'decimals')
-
-# Creating a list to be used to store the dataset; stores the actual values. Each item in the list is a recordObject
-# The dataset that the program will be working with is saved in this list - 100 DTOs will be instantiated and then saved
-# into this list.
-potatoesList = list()
-
-
 ################################
 # Creating Model class
 class Model:
 
-    def __init__(self):
-        self._item_type = 'potatoes production'
-
-    @property
-    def item_type(self):
-        return self._item_type
-
-    @item_type.setter
-    def item_type(self, new_item_type):
-        self._item_type = new_item_type
-
-    # Method to save dataset
+    # Method creates and saves a new file with the same column headers as the dataset
+    # Name of file is input by user.
     @staticmethod
     def save_dataset(dataset_name):
         try:
@@ -91,24 +78,23 @@ class Model:
                 fieldnames = columnNames
                 writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
                 writer.writeheader()
-                # for row in potatoesList:
-                #     writer.writerow(row)
                 csv_file.close()
         except Exception as e:
             print('The new dataset {} cannot be created'.format(dataset_name))
             print(e)
             exit(2)
 
-    # Method to create record
+    # Method to create a new record and add it to the working dataset
     @staticmethod
-    def create_new_record(newRecord):
-        potatoesList.append(newRecord)
+    def create_new_record(new_record):
+        potatoesList.append(new_record)
 
-    # Method to update record
+    # Method to update an existing record in the dataset that has been loaded
     @staticmethod
     def update_record(record_index):
+        edit_record = potatoesList[record_index - 1]
         print('The {}th record has been selected, and is shown below:'.format(record_index))
-        print(potatoesList[record_index - 1])
+        print(edit_record)
         while True:
             key = input('Type name of column to edit:')
             print(key + ' : ' + potatoesList[record_index - 1][key])
@@ -128,7 +114,7 @@ class Model:
 
 
 # Method to print author name. Made at the global-level so that it can be called when needed. This method could be
-# placed anywhere but I felt Model was most appropriate since it is presented as application data in the requirements.
+# placed anywhere, but I felt Model was most appropriate since it is presented as application data in the requirements.
 # Another place it could be placed is in View.
 def print_student_name():
     print('Program written by Amy Guo')

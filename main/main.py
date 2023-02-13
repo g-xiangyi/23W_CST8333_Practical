@@ -15,11 +15,9 @@ from model.Model import potatoesList, Model
 from view.View import View
 from controller.Controller import Controller
 
-# Driver method runs entire program
+
+# Driver method runs entire application
 def main():
-    # open dataset
-    ds_name = "32100358.csv"
-    ds_size = 10
 
     mmodel = Model()
     mview = View()
@@ -78,4 +76,4 @@ def main():
 # YOU NEED TO COMMENT THIS!!! Marks which methods to run upon clicking run program
 if __name__ == '__main__':
     main()
-   # unittest.main()
+# unittest.main()

@@ -142,63 +142,15 @@ class Controller:
                 print("####### Test: Create a new record")
                 print('The following is an example:')
                 self.show_range_ds(1, 1)
-                print(columnNames)
-                new_record = RecordObject()
-                while True:
-                    in_value = input(
-                        'Enter the value to {} (e.g. 2022): '.format(columnNames[0]))
-                    new_record[columnNames[0]] = in_value
-                    break
+                sample = potatoesList[0]
+                new_record = potatoesList[0]
 
-                while True:
+                for key in columnNames:
                     in_value = input(
-                        'Enter the value to {} (e.g. Ontario): '.format(columnNames[1]))
-                    new_record[columnNames[1]] = in_value
-                    break
-
-                while True:
-                    in_value = input(
-                        'Enter the value to {} (e.g. 2022A000235): '.format(columnNames[2]))
-                    new_record[model.Model.columnNames[2]] = in_value
-                    break
-
-                while True:
-                    in_value = input(
-                        'Enter the value to {} (e.g. Production, potatoes): '.format(model.Model.columnNames[3]))
-                    new_record[model.Model.columnNames[3]] = in_value
-                    break
-
-                while True:
-                    in_value = input(
-                        'Enter the value to {} (e.g. Hundredweight): '.format(model.Model.columnNames[4]))
-                    new_record[model.Model.columnNames[4]] = in_value
-                    break
-
-                while True:
-                    in_value = input(
-                        'Enter the value to {} (e.g. 156): '.format(model.Model.columnNames[5]))
-                    new_record[model.Model.columnNames[5]] = in_value
-                    break
-
-                while True:
-                    in_value = input(
-                        'Enter the value to {} (e.g. thousands): '.format(model.Model.columnNames[6]))
-                    new_record[model.Model.columnNames[6]] = in_value
-                    break
-
-                while True:
-                    in_value = input(
-                        'Enter the value to {} (e.g. 3): '.format(model.Model.columnNames[7]))
-                    new_record[model.Model.columnNames[7]] = in_value
-                    break
-
-                new_record[model.Model.columnNames[8]] = "v47167"
-                new_record[model.Model.columnNames[9]] = "7.3"
-                new_record[model.Model.columnNames[10]] = "23456"
-                new_record[model.Model.columnNames[11]] = ""
-                new_record[model.Model.columnNames[12]] = ""
-                new_record[model.Model.columnNames[13]] = ""
-                new_record[model.Model.columnNames[14]] = "0"
+                        'Enter the value to {} (e.g. {}): '.format(key, getattr(sample, key)))
+                    if key == 'ref_date' or key == 'uom_id' or key == 'scalar_id' or key == 'decimals':
+                        in_value = int(in_value)
+                        setattr(new_record, key, in_value)
 
                 self.insert_record(new_record)
                 self.cview.show_dataset()

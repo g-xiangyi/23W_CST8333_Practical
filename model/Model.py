@@ -15,7 +15,7 @@ import dataclasses
 from collections import namedtuple
 from typing import NamedTuple
 from dataclasses import dataclass, fields
-
+from operator import itemgetter, attrgetter
 
 ################################
 # Creating a record object/Data Transfer Object used for transferring data between layers of the application
@@ -127,7 +127,6 @@ class Model:
                     potatoesList[record_index - 1] = edited_record
                     break
 
-
     # Method to delete record
     @staticmethod
     def delete_record(record_index):
@@ -135,6 +134,15 @@ class Model:
         del potatoesList[record_index - 1]
         return record
 
+    @staticmethod
+    def sort_dataset(sort_keys):
+        # perform sorting potatoesList and creating the sorted list
+        sorted_dataset = sorted(potatoesList, key=attrgetter(sort_keys))
+
+        # change the potatoesList
+        potatoesList.clear()
+        for item in sorted_dataset:
+            potatoesList.append(item)
 
 # Method to print author name
 def print_student_name():

@@ -92,3 +92,9 @@ class View:
         print('The []th record shown below has been deleted from the dataset:'.format(record_index))
         print(deleted_record)
         print_student_name()
+
+    # Delete record
+    @staticmethod
+    def view_sort_dataset(sort_keys):
+        print('The dataset has been sorted based on column name {}:'.format(sort_keys))
+        print_student_name()

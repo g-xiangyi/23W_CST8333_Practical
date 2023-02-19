@@ -20,14 +20,17 @@ import unittest
 def main():
     # open dataset
     ds_name = "32100358.csv"
-    ds_size = 10
+    ds_size = 100
 
     mmodel = Model()
     mview = View()
     mstore = DataStore()
-#    mstore.create_dataset_partial(ds_name, ds_size)
 
     c = Controller(mmodel, mview, mstore)
+
+    # print('######## load initial dataset')
+    # c.load_full_ds(ds_name)
+    # c.show_dataset()
 
 
 # THIS MUST BE LOADED BEFORE ANYTHING ELSE IN ORDER TO LOAD THE DATASET

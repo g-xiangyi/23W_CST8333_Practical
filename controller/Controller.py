@@ -35,7 +35,7 @@ class Controller:
 
     # Load full dataset
     def load_full_ds(self, file_name):
-        self.cmodel.create_dataset(file_name)
+        self.cpers.create_dataset(file_name)
         self.cview.view_load_ds(file_name)
 
     # Reload partial dataset
@@ -46,7 +46,7 @@ class Controller:
     # Reload full dataset
     def reload_full_ds(self, file_name):
         potatoesList.clear()
-        self.cmodel.create_dataset(file_name)
+        self.cpers.create_dataset(file_name)
 
     # Display full dataset
     def show_dataset(self):
@@ -80,6 +80,11 @@ class Controller:
         record = self.cmodel.delete_record(ix_delete_record)
         self.cview.view_delete_record(ix_delete_record, record)
 
+    def sort_dataset(self, sort_keys):
+        self.cmodel.sort_dataset(sort_keys)
+        self.cview.view_sort_dataset(sort_keys)
+        self.cview.show_dataset()
+
     def exit_selection(self, exit_type):
         while True:
             exit_type = input('Select another functionality (y/n)?')
@@ -104,13 +109,19 @@ class Controller:
             print('Press 4 to create and store a new record')
             print('Press 5 to edit an existing record')
             print('Press 6 delete an existing record')
+            print('Press 7 to sort the dataset')
             print_student_name()
             no = input('Please input a number from 1-6 (e.g. \'2\'): ')
 
             if no == '1':
                 print('####### Test: reload data from the dataset')
-                ds_size = int(input('How many data records to reload '))
-                self.reload_partial_ds(ds_name, ds_size)
+                entire_or_partial_dataset = input('Reload the entire dataset (Y/N)? ')
+                if entire_or_partial_dataset.lower() == 'y':
+                    self.reload_full_ds(ds_name)
+                else:
+                    ds_size = int(input('How many data records to reload '))
+                    self.reload_partial_ds(ds_name, ds_size)
+
                 self.show_dataset()
 
                 self.exit_selection(no)
@@ -187,6 +198,23 @@ class Controller:
                         break
                     else:
                         print('Invalid record number. Please try again!')
+
+                self.exit_selection(no)
+
+            elif no == '7':
+                print('####### Test: sort records')
+                while True:
+                    print('Sort the dataset based on a column. The column names are as follows:')
+                    print(columnNames)
+                    while True:
+                        sort_key = input('Enter the column name: ')
+                        if sort_key in columnNames:
+                            break
+                        else:
+                            print('Invalid column name. Try again')
+
+                    self.sort_dataset(sort_key)
+                    break
 
                 self.exit_selection(no)
 
